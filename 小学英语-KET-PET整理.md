@@ -10,7 +10,7 @@
 
 这一本把三块收在一处。第一块是广州小学一至六年级教科书里的词。第二块是剑桥 A2 Key（旧称 KET）。第三块是剑桥 B1 Preliminary（旧称 PET）。
 
-拼读不在这里，在《自然拼读》。发散、联想、词根词缀这三套记词方法收在本书第十八至二十章，供检索，不替代正文章节里的词表。初中阶段的词、广州中考卷面，以及比这两场考试更细的时态讲法，仍在《初中英语学习辅导手册》。KET 和 PET 要写的时态收在本书第十七章。
+拼读不在这里，在《自然拼读》。发散、联想、词根词缀这三套记词方法收在本书第十八至二十章，供检索，不替代正文章节里的词表。词性、句子成分、句子类型、语态和从句收在第二部分（第二十一至二十四章），范围按剑桥 A2 与 B1 官方语法清单划定。初中阶段的词、广州中考卷面，以及比这两场考试更细的时态讲法，仍在《初中英语学习辅导手册》。KET 和 PET 要写的时态收在本书第十七章。
 
 小学词按话题排，不按册逐课重排。一年级、二年级用广州出版社《小学英语口语》，先听会说。三年级到六年级用教科版（广州版）。同一个词只收一次。
 
@@ -25,7 +25,7 @@
 | ★ | 广州小学教科书里要会用的词 | 三至六年级听说读写。一二年级先听会说 |
 | ○ | 教科书里见过、不作为默写重点的词 | 见词能认，听音能指 |
 | ◆ | KET 官方词表里要能写出来的词 | 读写听三会，须能拼写 |
-| ● | PET 官方词表里要能写出来、前面三档还没有单列的词 | 读写听三会，须能拼写。收在第二十五章 |
+| ● | PET 官方词表里要能写出来、前面三档还没有单列的词 | 读写听三会，须能拼写。收在第二十九章 |
 
 小学或 KET 已经收了、PET 也要写的，标记仍用 ★、○ 或 ◆，说明栏写“兼 PET”。只在 PET 这一档新出现的，标 ●。
 
@@ -58,16 +58,23 @@
 - [第十九章 联想记忆法](#第十九章-联想记忆法)
 - [第二十章 词根词缀](#第二十章-词根词缀)
 
-### [第二部分 KET](#第二部分-ket)
+### [第二部分 语法系统](#第二部分-语法系统)
 
-- [第二十一章 KET 考什么](#第二十一章-ket-考什么)
-- [第二十二章 KET 要会拼的词](#第二十二章-ket-要会拼的词)
+- [第二十一章 词性与句子成分](#第二十一章-词性与句子成分)
+- [第二十二章 句子类型](#第二十二章-句子类型)
+- [第二十三章 语态](#第二十三章-语态)
+- [第二十四章 从句](#第二十四章-从句)
 
-### [第三部分 PET](#第三部分-pet)
+### [第三部分 KET](#第三部分-ket)
 
-- [第二十三章 PET 考什么](#第二十三章-pet-考什么)
-- [第二十四章 PET 写作和语言](#第二十四章-pet-写作和语言)
-- [第二十五章 PET 要会拼的词](#第二十五章-pet-要会拼的词)
+- [第二十五章 KET 考什么](#第二十五章-ket-考什么)
+- [第二十六章 KET 要会拼的词](#第二十六章-ket-要会拼的词)
+
+### [第四部分 PET](#第四部分-pet)
+
+- [第二十七章 PET 考什么](#第二十七章-pet-考什么)
+- [第二十八章 PET 写作和语言](#第二十八章-pet-写作和语言)
+- [第二十九章 PET 要会拼的词](#第二十九章-pet-要会拼的词)
 
 ---
 
@@ -75,7 +82,7 @@
 
 ---
 
-小学阶段先把这一部分的 ★ 写熟。表里的 ◆ 是 KET 要会拼的词，汇总在第二十二章。说明栏写“兼 PET”的，KET 或小学档已经收了，PET 也要会写。只在 PET 里新出现的词标 ●，收在第二十五章。
+小学阶段先把这一部分的 ★ 写熟。表里的 ◆ 是 KET 要会拼的词，汇总在第二十六章。说明栏写“兼 PET”的，KET 或小学档已经收了，PET 也要会写。只在 PET 里新出现的词标 ●，收在第二十九章。
 
 ---
 
@@ -2926,11 +2933,405 @@ care、help、use 三族结构完全一样，都是词根加 -ful、-less、-er�
 
 ---
 
-# 第二部分 KET
+# 第二部分 语法系统
 
 ---
 
-## 第二十一章 KET 考什么
+## 第二十一章 词性与句子成分
+
+词在英语里有分工，句子有骨架。这一章把两件事说清：一个词属于哪一类，以及它在句子里占哪个位置。KET 和 PET 的官方语法清单就是按词性组织的，名词、代词、形容词、副词、介词、连词各列一条。不知道词性，看官方清单就像看一本没有目录的书。
+
+### 21.1 八种词性
+
+表 21-1　八种词性
+
+| 词性 | 作用 | 例词 | 一句话说明 |
+|---|---|---|---|
+| 名词 | 人、物、地方的名字 | book, water, London | 可数与不可数见 6.7 |
+| 动词 | 动作与状态 | run, is, have | 句子的心脏，时态挂在它上面（第十七章） |
+| 形容词 | 修饰名词 | red, happy, tall | 放在名词前，或放在 be 后 |
+| 副词 | 修饰动词、形容词、整句 | quickly, very, often | 很多是形容词加 -ly，见本书 23.5 |
+| 代词 | 代替名词 | I, my, mine, this | 总表在第十六章 |
+| 介词 | 表示时间、地点、方向 | in, on, at, by | 第十五章 |
+| 连词 | 连接词与句子 | and, but, because, if | 第二十四章会大量用到 |
+| 感叹词 | 表达情绪 | oh, wow, ouch | 认得即可，不考 |
+
+冠词是限定词里的小类：a、an、the，第十五章已专讲。数词归在形容词一类里看，基数词与序数词见 6.1 到 6.4。
+
+### 21.2 一词多性
+
+同一个拼写可以是不同词性。查词典、判断句子时，先问它占哪个位置。
+
+表 21-2　一词多性（8 组）
+
+| 词 | 作名词 | 作动词 | 作其他 |
+|---|---|---|---|
+| water | 水 | 浇水 | |
+| run | 一段跑步 | 跑 | |
+| walk | 一段散步 | 走路 | |
+| look | 一眼 | 看 | |
+| fast | | | 快的（形）；快地（副） |
+| well | 井 | | 好（副）；健康的（形） |
+| clean | | 打扫（动） | 干净的（形） |
+| dream | 梦 | 做梦 | |
+
+判断的办法是看位置：名词前多为形容词（a fast car），动词后多为副词（run fast），the 或 a 后面多为名词（a walk）。
+
+### 21.3 六个句子成分
+
+表 21-3　六个句子成分
+
+| 成分 | 作用 | 常见位置 | 例句（加粗处） |
+|---|---|---|---|
+| 主语 | 句子说的是谁或什么 | 句首 | **The boy** reads. |
+| 谓语 | 主语做什么、是什么 | 主语后 | The boy **reads**. |
+| 宾语 | 动作的承受者 | 及物动词后 | He reads **books**. |
+| 表语 | 说明主语是什么样 | be、become、look 后 | He is **happy**. |
+| 定语 | 修饰名词 | 名词前 | The **red** book |
+| 状语 | 修饰动词，说时间地点方式 | 句尾或句首 | He reads **in the room**. |
+
+标成分不是为了考试，是为了在自己写错时找得到错。中文句子翻成英文，缺了谓语、或者一个句子里挤了两个谓语又没有连词，标一遍成分就看得出来。
+
+### 21.4 五种基本句型
+
+英语句子再长，骨架只有五种。
+
+表 21-4　五种基本句型
+
+| 句型 | 结构 | 例句 |
+|---|---|---|
+| 一 | 主 ＋ 谓 | Birds fly. |
+| 二 | 主 ＋ 系 ＋ 表 | She is a teacher. / The soup smells good. |
+| 三 | 主 ＋ 谓 ＋ 宾 | I like music. |
+| 四 | 主 ＋ 谓 ＋ 间接宾语 ＋ 直接宾语 | He gave me a book. |
+| 五 | 主 ＋ 谓 ＋ 宾 ＋ 宾补 | They call him Tom. / The news made us happy. |
+
+句型四有两个宾语：先人后物。物在前时，人要加 to 或 for：He gave a book to me.
+
+句型五的宾补是把宾语说完整的部分：The news made us 后面不接 happy，意思就悬着。make sb happy、call sb sth、keep sb doing 都属于这一型。
+
+### 21.5 为什么考 KET 和 PET 要学这个
+
+PET 写作评分里有一项叫语言，看句子对不对、有没有变化。五种句型写对，结构分就稳；会写第四、第五种，句子就有变化。KET 阅读里拆长句，也靠先抓主谓、再把定语状语放一边。
+
+### 21.6 习题
+
+一、标出这三句的六个成分：The girl reads a book in the library. / She is happy. / He gave his mother a flower.
+
+二、从表 21-2 挑三个词，各写两句，用两种不同词性。
+
+三、用五种基本句型各写一句，话题自选。
+
+---
+
+## 第二十二章 句子类型
+
+### 22.1 按用途分四种
+
+表 22-1　四种句子类型
+
+| 类型 | 作用 | 例句 | 句末标点 |
+|---|---|---|---|
+| 陈述句 | 说一件事 | She is a doctor. | 句号 |
+| 疑问句 | 问一件事 | Are you ready? | 问号 |
+| 祈使句 | 要求或禁止 | Open the door. / Don't run. | 句号或叹号 |
+| 感叹句 | 表达强烈感情 | What a nice day! | 叹号 |
+
+KET 听力里全是祈使句（告示、指令）和疑问句。感叹句多在阅读和口语里出现，认得就够。
+
+### 22.2 疑问句的四种
+
+表 22-2　疑问句四种
+
+| 种类 | 开头 | 例句 | 回答 |
+|---|---|---|---|
+| 一般疑问 | be、助动词、情态动词提前 | Can you swim? | Yes, I can. / No, I can't. |
+| 特殊疑问 | 疑问词 | Where do you live? | 直接说内容 |
+| 选择疑问 | or 给出选项 | Tea or coffee? | 选一个 |
+| 反意疑问 | 陈述 ＋ 短问 | It's cold, isn't it? | 按事实答 |
+
+疑问词是 KET 官方清单列死的：what、what 加名词、where、when、who、whose、which、how、how much、how many、how often、how long、why。每一个都能和第十七章的所有时态、情态动词配成问句。
+
+反意疑问遵循“前肯后否、前否后肯”：You like jazz, don't you? / He isn't here, is he? 短问里的动词照抄原句的 be、助动词或情态动词。回答按事实，不按问的形式：事实是肯定就答 Yes。
+
+### 22.3 祈使句
+
+主语永远是你，省掉不写。三种形式：
+
+表 22-3　祈使句三种形式
+
+| 形式 | 结构 | 例句 |
+|---|---|---|
+| 要求 | 动词原形开头 | Stand up. / Be careful. |
+| 禁止 | Don't 加原形 | Don't be late. / Don't touch it. |
+| 建议 | Let's 加原形 | Let's go home. |
+
+祈使句里的 be 动词要写 Be：Be quiet. 写成 Quiet. 或 Are quiet. 都不成句。Let's 的否定是 Let's not：Let's not wait.
+
+### 22.4 感叹句
+
+两个开头：What 修名词，How 修形容词或副词。
+
+表 22-4　感叹句两个开头
+
+| 开头 | 结构 | 例句 |
+|---|---|---|
+| What | What 加 (a/an) 加形容词加名词 | What a nice day! / What beautiful flowers! |
+| How | How 加形容词或副词 | How fast he runs! / How kind you are! |
+
+记一句：有名词用 What，只有形容词或副词用 How。可数单数要留 a：What an interesting book!
+
+### 22.5 there be
+
+there be 表示“某处有某物”，不是“某人有某物”。
+
+表 22-5　there be 与 have
+
+| 句式 | 意思 | 例句 |
+|---|---|---|
+| There is / are | 某处存在某物 | There is a cat on the roof. |
+| have / has | 某人拥有某物 | I have a cat. |
+
+就近原则：后面跟多个主语时，be 跟最近的一个一致：There is a pen and two books on the desk. / There are two books and a pen on the desk.
+
+There have 是常见错写。there 只占位置，真正的动词是 be。
+
+### 22.6 so 与 neither 倒装
+
+前一句说的情况也适用于另一个人，用倒装。
+
+表 22-6　so 与 neither 倒装
+
+| 情况 | 结构 | 例句 |
+|---|---|---|
+| 肯定也如此 | So 加助动词或 be 或情态 加主语 | I like tea. — So do I. |
+| 否定也如此 | Neither 加助动词或 be 或情态 加主语 | I can't swim. — Neither can I. |
+| 确认同一主语 | So 加主语 加助动词 | He said he'd come, and so he did. |
+
+助动词照抄前句的时态与动词：She is tall. — So is he. / They went home. — So did we.
+
+两种 so 句要分清：So do I 是“我也”（换主语）；So he did 是“他确实做了”（同主语，确认）。PET 阅读常考这个区别。
+
+### 22.7 短问与短答
+
+KET 官方清单里有 short questions and answers：Can you? / No, he doesn't. 听力里第二个人常常只答助动词：Will you come? — I will. 听清问的是哪个助动词，就能答对。
+
+### 22.8 习题
+
+一、把 She can speak French 改成四种句子：一般疑问、否定、反意疑问、用 how 的感叹。
+
+二、用 so 或 neither 回答：I don't like rain. / He is a doctor. / They have finished.
+
+三、写三句 there be 描述你的房间，其中一句用就近原则。
+
+---
+
+## 第二十三章 语态
+
+### 23.1 主动与被动
+
+主语做动作，是主动：The boy broke the window. 主语承受动作，是被动：The window was broken (by the boy).
+
+形式只有一行：**be 加过去分词**。时态体现在 be 上：is broken 是现在，was broken 是过去，will be broken 是将来。
+
+### 23.2 KET：一般现在与一般过去的被动
+
+KET 官方清单里的被动只有这两个时间。
+
+表 23-1　一般现在与一般过去的被动
+
+| 时态 | 形式 | 例句 |
+|---|---|---|
+| 一般现在 | am / is / are 加过去分词 | English is spoken here. |
+| 一般过去 | was / were 加过去分词 | The bridge was built in 1990. |
+
+过去分词：规则动词加 -ed；不规则动词用第十七章不规则动词表的第三栏。
+
+### 23.3 什么时候用被动
+
+表 23-2　用被动的三种情况
+
+| 情况 | 例句 |
+|---|---|
+| 动作发出者不知道 | My bike was stolen. |
+| 动作发出者不重要 | Rice is grown in the south. |
+| 动作发出者显而易见 | He was caught by the police. |
+
+说明文和新闻里被动很多，PET 阅读的网页与报道尤其如此。认得被动，就不会把 was built 读成“建了某物”。
+
+### 23.4 PET：情态被动
+
+情态动词加 be 加过去分词：must be finished、can be done、should be kept、may be asked。
+
+表 23-3　情态被动
+
+| 例句 | 意思 |
+|---|---|
+| The work must be finished today. | 必须今天被完成 |
+| It can't be done by hand. | 没法用手完成 |
+| Pets should be kept indoors. | 宠物应当养在室内 |
+
+### 23.5 PET：使役 have 与 get
+
+让别人替自己做某事，用 have 或 get 加宾语加过去分词。
+
+表 23-4　使役结构
+
+| 例句 | 意思 |
+|---|---|
+| I had my hair cut. | 我（请人）理了发 |
+| She got her bike repaired. | 她（请人）修了车 |
+| We're having the house painted. | 我们（请人）在刷房子 |
+
+和自己动手对照：I cut my hair 是自己剪，可能剪得不好；I had my hair cut 是理发师剪。PET 官方清单点名 causative have/get，听力和阅读里都常见。
+
+### 23.6 三个坑
+
+第一，被动句的动词后面不再接宾语：The window was broken 已经完整，再加 it 就错。
+
+第二，be 不能省：The window broken yesterday 不是句子，只是一个名词短语。
+
+第三，不要滥用被动：中文说“信已经写了”，英文常常直接写 I have written the letter。动作发出者清楚且重要时，用主动。
+
+### 23.7 习题
+
+一、改成被动：They built this house in 1980. / People speak English here. / Someone stole my phone.
+
+二、改成主动：The letter was written by Tom. / The room must be cleaned today.
+
+三、写两句 have 或 get 某事被做的句子，说家里这个月请人做过的事。
+
+---
+
+## 第二十四章 从句
+
+从句是句子里套着的句子。KET 要求会认会用几种固定的从句；PET 再加宾语从句、间接引语、定语从句和条件句。这一章把两级一次讲完。
+
+### 24.1 三类从句与考试范围
+
+表 24-1　三类从句与 KET、PET 范围
+
+| 类别 | 作用 | KET | PET 增加 |
+|---|---|---|---|
+| 状语从句 | 说时间、地点、原因、条件 | if、when、where、because | although、until、while、unless、so that |
+| 宾语从句 | 作动词的宾语 | think、know、hope、say 后的 that 从句 | if / whether、疑问词从句、间接引语 |
+| 定语从句 | 修饰名词 | who、which、that（认） | 会用，含关系词省略 |
+
+### 24.2 KET 的从句
+
+KET 官方清单给了四个连词和两组动词。
+
+表 24-2　KET 从句
+
+| 类型 | 例句 |
+|---|---|
+| sure、certain 后 | I'm sure (that) she's a doctor. |
+| know、think、believe、hope 后 | I hope you're well. |
+| say、tell 后 | She says (that) she's his sister. |
+| if | I'll leave if you do that again. |
+| when | He'll come when you call. |
+| where | He'll follow where you go. |
+| because | I came because you asked me. |
+
+这些句子里的 that 口语和非正式书写里可以省，考试里写上更稳。
+
+### 24.3 宾语从句与间接引语（PET）
+
+宾语从句有三条规矩：连接词（that、if、whether、疑问词）、**语序保持陈述**、时态跟主句走。
+
+表 24-3　宾语从句的语序
+
+| 错 | 对 | 原因 |
+|---|---|---|
+| I don't know where does he live. | I don't know where he lives. | 从句用陈述语序 |
+| Can you tell me what is your name? | Can you tell me what your name is? | 同上 |
+
+间接引语是把别人的话转进自己的句子，时态通常退一步。
+
+表 24-4　间接引语的时态后退
+
+| 原话 | 转述 |
+|---|---|
+| He said, "I am tired." | He said (that) he was tired. |
+| He said, "I will go." | He said he would go. |
+| He said, "I have finished." | He said he had finished. |
+| He asked, "Are you ready?" | He asked me if I was ready. |
+| He said, "Don't be late." | He told me not to be late. |
+
+人称和时间词也跟着变：I 变 he 或 she，now 变 then，today 变 that day，here 变 there。
+
+### 24.4 定语从句
+
+定语从句像一个形容词，修饰前面那个名词；被修饰的名词叫先行词。
+
+表 24-5　关系词
+
+| 先行词 | 关系词 | 例句 |
+|---|---|---|
+| 人 | who / that | The boy who is running is my brother. |
+| 物 | which / that | The book which I bought is new. |
+| 地点 | where | This is the park where we met. |
+| 所属 | whose | The girl whose bag is red is my cousin. |
+
+关系词在从句里作宾语时可以省：The book (which) I bought is new. 作主语时不能省：The boy who is running 里的 who 去掉就不成句。
+
+### 24.5 条件句
+
+PET 官方清单列了三类条件句。
+
+表 24-6　三类条件句
+
+| 类型 | 用途 | 形式 | 例句 |
+|---|---|---|---|
+| 零类 | 普遍事实 | If 加现在，现在 | If you heat ice, it melts. |
+| 一类 | 将来可能 | If 加现在，will 加原形 | If you do that again, I'll leave. |
+| 二类 | 与现在相反 | If 加过去，would 加原形 | If I were you, I wouldn't do that. |
+
+一类条件句的 if 从句用现在表将来：If it rains tomorrow, we will stay at home. if 从句里写 will rain 是错的。
+
+二类条件句里的 be 通常全人称用 were：If I were you. 这就是 PET 官方点名的 if I were you 句式。
+
+### 24.6 状语从句与连词（PET）
+
+PET 的连词清单比 KET 长得多。
+
+表 24-7　PET 常见连词
+
+| 连词 | 意思 | 例句 |
+|---|---|---|
+| although | 虽然 | Although it rained, we went out. |
+| while | 当……时；而 | While I was cooking, he set the table. |
+| until | 直到 | Wait until I come back. |
+| before / after | 在……之前／之后 | Wash your hands before you eat. |
+| as soon as | 一……就 | I'll call you as soon as I arrive. |
+| since | 自从 | I've lived here since 2020. |
+| unless | 除非 | Unless you hurry, you'll miss the bus. |
+| so that / in order to | 为了 | I saved money so that I could buy a bike. |
+| so ... that | 如此……以至于 | It was so cold that the lake froze. |
+
+although 和 but 不能同句：Although it rained, we went out. 或 It rained, but we went out. 二选一。because 和 so 同理。
+
+### 24.7 从句里的两条时态规矩
+
+第一，时间和条件从句（when、if、as soon as、until 引导）里用现在表将来：I'll call you when I get home. 不写 when I will get home。
+
+第二，宾语从句跟主句：主句现在时，从句任何时态；主句过去时，从句后退（见 24.3）。从句若是普遍事实，保持现在：The teacher said the earth moves around the sun.
+
+### 24.8 习题
+
+一、用 because、although、so that 各把两句合成一句：It was late. We went home.
+
+二、转述三句："I am reading," she said. / "Don't open the window," he said. / "Where is the station?" she asked.
+
+三、写一类和二类条件句各一句，话题自选。
+
+---
+
+# 第三部分 KET
+
+---
+
+## 第二十五章 KET 考什么
 
 KET 的正式名称是 A2 Key。面向中小学生的一套叫 A2 Key for Schools。它在 PET 下面一档。广州小学的词是底，◆ 是这张卷子要能写出来的那一层。
 
@@ -2938,19 +3339,19 @@ KET 的正式名称是 A2 Key。面向中小学生的一套叫 A2 Key for School
 
 听力约 30 分钟，五部分，都是短对话或短独白。口语双人约 8 到 10 分钟，分两部分：先互问个人信息，再一起看图完成一个小任务。
 
-词表是命题用的指南，不是背完就能封顶的清单。第一部分各表里标 ◆ 的词，按第二十二章再过一遍拼写。时态按第十七章表 17-18 准备。KET 要会写的是一般现在时、现在进行时、一般过去时、过去进行时、现在完成时，以及 will、shall 和 be going to。现在完成时要会 just、yet、already、never、ever、for、since。故事里一件长的事被一件短的事打断，长的用过去进行时，短的用一般过去时。was / were going to 和 used to 是 PET 多出来的，KET 的清单里没有。
+词表是命题用的指南，不是背完就能封顶的清单。第一部分各表里标 ◆ 的词，按第二十六章再过一遍拼写。时态按第十七章表 17-18 准备。KET 要会写的是一般现在时、现在进行时、一般过去时、过去进行时、现在完成时，以及 will、shall 和 be going to。现在完成时要会 just、yet、already、never、ever、for、since。故事里一件长的事被一件短的事打断，长的用过去进行时，短的用一般过去时。was / were going to 和 used to 是 PET 多出来的，KET 的清单里没有。
 
 ### 习题
 
 一、用至少 25 个词写一条短信，告诉朋友三件事：你明天有空，你想去公园，你问他几点见面。
 
-二、从第二十二章里挑十个 ◆ 词，盖住英文，只看中文，把拼写写出来。
+二、从第二十六章里挑十个 ◆ 词，盖住英文，只看中文，把拼写写出来。
 
 三、用一般过去时讲三幅图里可能发生的事，写满 35 个词。先写开头 One day，再写 then，最后写一句结果。
 
 ---
 
-## 第二十二章 KET 要会拼的词
+## 第二十六章 KET 要会拼的词
 
 下面只留第一部分里标 ◆ 的词，方便考前专背拼写。音标和释义与第一部分相同。说明栏只留怎么拼、怎么读；“兼 PET”以第一部分的原表为准。一个词若在小学表里是 ★ 或 ○，即使 KET 也收，仍按小学那一档，不在这里重复。小节标题写“来自第×章”，回到第一部分查原表，这里不再另起一章。
 
@@ -3219,11 +3620,11 @@ KET 的正式名称是 A2 Key。面向中小学生的一套叫 A2 Key for School
 
 ---
 
-# 第三部分 PET
+# 第四部分 PET
 
 ---
 
-## 第二十三章 PET 考什么
+## 第二十七章 PET 考什么
 
 PET 的正式名称是 B1 Preliminary。面向中学生的一套叫 B1 Preliminary for Schools。它比 KET 高一档。小学词和 KET 的 ◆ 仍然要用，这一章只写这张卷子多出来的考法。
 
@@ -3245,7 +3646,7 @@ PET 的正式名称是 B1 Preliminary。面向中学生的一套叫 B1 Prelimina
 
 ---
 
-## 第二十四章 PET 写作和语言
+## 第二十八章 PET 写作和语言
 
 邮件有两句套话。开头说明目的：I am writing to ask about the trip. 结尾表示期待：I look forward to hearing from you. look forward to 的 to 是介词，后面接名词或 -ing。不说 I look forward to hear from you。
 
@@ -3257,7 +3658,7 @@ if 从句表示将来时，从句用一般现在时：If it rains tomorrow, we w
 
 情态动词后面接原形。PET 还点名 might、have to、ought to、mustn't、needn't。mustn't 是禁止，needn't 是不必，两句不能对调。
 
-时态的结构和例句在第十七章。不规则动词的更多形式、从句的完整讲法，在《初中英语学习辅导手册》第三部分和第四部分。这一章只留上考场之前要核对的邮件、连接词和情态动词。
+时态的结构和例句在第十七章，从句在第二十四章。不规则动词的更多形式，在《初中英语学习辅导手册》。这一章只留上考场之前要核对的邮件、连接词和情态动词。
 
 ### 习题
 
@@ -3270,11 +3671,11 @@ if 从句表示将来时，从句用一般现在时：If it rains tomorrow, we w
 ---
 
 
-## 第二十五章 PET 要会拼的词
+## 第二十九章 PET 要会拼的词
 
-下面这些词小学各表和 KET 的 ◆ 里没有单列。PET 要能写出来，标 ●。已经在前面出现、说明栏写了“兼 PET”的，不在这里重复。● 本身就是 PET 这一档，说明栏不再写“兼 PET”。小节按话题从 25.1 编起。
+下面这些词小学各表和 KET 的 ◆ 里没有单列。PET 要能写出来，标 ●。已经在前面出现、说明栏写了“兼 PET”的，不在这里重复。● 本身就是 PET 这一档，说明栏不再写“兼 PET”。小节按话题从 29.1 编起。
 
-### 25.1 性格与为人
+### 29.1 性格与为人
 
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
@@ -3293,7 +3694,7 @@ if 从句表示将来时，从句用一般现在时：If it rains tomorrow, we w
 | ● easy-going | /ˌiːzi ˈɡəʊɪŋ/ | 随和的 | 连字符可保留 |
 | ● modest | /ˈmɒdɪst/ | 谦虚的 | 与 proud 相对 |
 
-### 25.2 学校、学科与考试
+### 29.2 学校、学科与考试
 
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
@@ -3307,7 +3708,7 @@ if 从句表示将来时，从句用一般现在时：If it rains tomorrow, we w
 | ● project | /ˈprɒdʒekt/ | 课题；项目 | 重音在第一音节 |
 | ● university | /ˌjuːnɪˈvɜːsəti/ | 大学 | 泛指上大学可说 go to university，英式常不加 the |
 
-### 25.3 规则、家务与日常
+### 29.3 规则、家务与日常
 
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
@@ -3318,7 +3719,7 @@ if 从句表示将来时，从句用一般现在时：If it rains tomorrow, we w
 | ● habit | /ˈhæbɪt/ | 习惯 | a good habit |
 | ● stay up | /steɪ ʌp/ | 熬夜 |  |
 
-### 25.4 健康与饮食
+### 29.4 健康与饮食
 
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
@@ -3332,7 +3733,7 @@ if 从句表示将来时，从句用一般现在时：If it rains tomorrow, we w
 | ● order | /ˈɔːdə(r)/ | 点餐；命令 | 点餐是 order a bowl of noodles |
 | ● homemade | /ˌhəʊmˈmeɪd/ | 家里做的 | PET 饮食话题常用 |
 
-### 25.5 社区与城市
+### 29.5 社区与城市
 
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
@@ -3347,7 +3748,7 @@ if 从句表示将来时，从句用一般现在时：If it rains tomorrow, we w
 | ● upstairs | /ˌʌpˈsteəz/ | 在楼上 | 反义 downstairs |
 | ● entrance | /ˈentrəns/ | 入口 | 动词 enter。PET 看指示牌要认 |
 
-### 25.6 旅行
+### 29.6 旅行
 
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
@@ -3360,7 +3761,7 @@ if 从句表示将来时，从句用一般现在时：If it rains tomorrow, we w
 | ● foreign | /ˈfɒrən/ | 外国的 | foreigner 外国人 |
 | ● custom | /ˈkʌstəm/ | 习俗 | 海关复数 customs，不要混 |
 
-### 25.7 自然与环保
+### 29.7 自然与环保
 
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
@@ -3374,7 +3775,7 @@ if 从句表示将来时，从句用一般现在时：If it rains tomorrow, we w
 | ● forest | /ˈfɒrɪst/ | 森林 |  |
 | ● reduce | /rɪˈdjuːs/ | 减少 | reduce pollution |
 
-### 25.8 科技与通讯
+### 29.8 科技与通讯
 
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
@@ -3392,7 +3793,7 @@ if 从句表示将来时，从句用一般现在时：If it rains tomorrow, we w
 | ● believe | /bɪˈliːv/ | 相信 | believe sb 相信某人的话；believe in sb 信任某人 |
 | ● social media | /ˌsəʊʃl ˈmiːdiə/ | 社交媒体 | media 本身是复数形式，这里当一个名称用 |
 
-### 25.9 情感与人际
+### 29.9 情感与人际
 
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
@@ -3407,7 +3808,7 @@ if 从句表示将来时，从句用一般现在时：If it rains tomorrow, we w
 | ● stranger | /ˈstreɪndʒə(r)/ | 陌生人 | strange 是“奇怪的”，不只是“陌生的” |
 | ● get on with | /ɡet ɒn wɪð/ | 与某人相处 | 也说 get along with。美式更常 along |
 
-### 25.10 购物与金钱
+### 29.10 购物与金钱
 
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
@@ -3417,7 +3818,7 @@ if 从句表示将来时，从句用一般现在时：If it rains tomorrow, we w
 | ● discount | /ˈdɪskaʊnt/ | 折扣 |  |
 | ● receipt | /rɪˈsiːt/ | 收据 | p 不发音。 |
 
-### 25.11 志愿、选择与未来
+### 29.11 志愿、选择与未来
 
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
@@ -3429,7 +3830,7 @@ if 从句表示将来时，从句用一般现在时：If it rains tomorrow, we w
 | ● teenager | /ˈtiːneɪdʒə(r)/ | 青少年 | 13 到 19 岁 |
 | ● career | /kəˈrɪə(r)/ | 事业 | 比 job 长，指一生的职业路径。PET 会用 |
 
-### 25.12 把句子接起来
+### 29.12 把句子接起来
 
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
@@ -3441,13 +3842,13 @@ if 从句表示将来时，从句用一般现在时：If it rains tomorrow, we w
 | ● I look forward to | 邮件结尾，期待 | I look forward to hearing from you. |
 | ● I am writing to | 邮件开头，说明目的 | I am writing to ask about the trip. |
 
-### 25.13 高频短语动词
+### 29.13 高频短语动词
 
 | 词条 | 释义 | 说明 |
 |---|---|---|
 | ● get up | 起床 |  |
 
-### 25.14 固定搭配
+### 29.14 固定搭配
 
 | 词条 | 释义 | 说明 |
 |---|---|---|

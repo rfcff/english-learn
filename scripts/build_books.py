@@ -19,32 +19,60 @@ IMG = ROOT.as_uri() + "/images/"
 
 CN_DIGIT = {ch: i for i, ch in enumerate("零一二三四五六七八九")}
 
+# GB/T 18358-2009: 订口 13mm、切口 10mm、天头 15mm、地脚 17mm；
+# 版心 152×228mm → 成品 175×260mm。
 CSS = r"""
 @page {
-  size: B5;
-  margin: 16mm 16mm 16mm 20mm;
+  size: 175mm 260mm;
+  margin-top: 15mm;
+  margin-bottom: 17mm;
   @bottom-center {
     content: counter(page);
-    font-family: "Times New Roman", "Songti SC", serif;
+    font-family: "Times New Roman", "Arial", "Songti SC", sans-serif;
     font-size: 9pt;
-    color: #3a342c;
+    font-weight: 600;
+    color: #1a4f82;
   }
 }
 @page:left {
-  margin-left: 14mm;
-  margin-right: 22mm;
+  margin-left: 10mm;
+  margin-right: 13mm;
+  @bottom-left { content: none; }
+  @bottom-right { content: none; }
+  @bottom-center {
+    content: counter(page);
+    font-family: "Times New Roman", "Arial", "Songti SC", sans-serif;
+    font-size: 9pt;
+    font-weight: 600;
+    color: #1a4f82;
+    padding-left: 1.5mm;
+  }
 }
 @page:right {
-  margin-left: 22mm;
-  margin-right: 14mm;
+  margin-left: 13mm;
+  margin-right: 10mm;
+  @bottom-left { content: none; }
+  @bottom-right { content: none; }
+  @bottom-center {
+    content: counter(page);
+    font-family: "Times New Roman", "Arial", "Songti SC", sans-serif;
+    font-size: 9pt;
+    font-weight: 600;
+    color: #1a4f82;
+    padding-right: 1.5mm;
+  }
 }
 @page:first {
-  margin: 22mm 20mm 20mm 20mm;
+  margin: 15mm 10mm 17mm 13mm;
+  @bottom-left { content: none; }
+  @bottom-right { content: none; }
   @bottom-center { content: none; }
 }
 @page cover {
-  size: B5;
-  margin: 22mm 20mm 20mm 20mm;
+  size: 175mm 260mm;
+  margin: 15mm 10mm 17mm 13mm;
+  @bottom-left { content: none; }
+  @bottom-right { content: none; }
   @bottom-center { content: none; }
 }
 
@@ -89,20 +117,21 @@ section.chapter, section.part { break-before: page; page-break-before: always; }
 section.cover { break-before: auto; page-break-before: auto; }
 
 .cover h1 {
-  margin: 58mm 0 0;
+  margin: 52mm 0 0;
   text-align: center;
-  font-family: "Songti SC", "STSong", serif;
+  font-family: "Hiragino Sans GB", "STHeiti", "Songti SC", sans-serif;
   font-size: 26pt;
-  font-weight: 500;
-  letter-spacing: 0.18em;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   line-height: 1.45;
+  color: #1a4f82;
 }
 .latin { letter-spacing: 0; }
 .cover .rule {
-  width: 28mm;
+  width: 36mm;
   border: none;
-  border-top: 0.9pt solid #7a2e2a;
-  margin: 9mm auto 0;
+  border-top: 3.2pt solid #1f6fb2;
+  margin: 8mm auto 0;
   height: 0;
 }
 .cover .meta {
@@ -110,7 +139,7 @@ section.cover { break-before: auto; page-break-before: auto; }
   margin-top: 8mm;
   letter-spacing: 0.32em;
   font-size: 11pt;
-  color: #3f3832;
+  color: #1a4f82;
 }
 .cover p { text-align: center; }
 .cover table {
@@ -122,35 +151,35 @@ section.cover { break-before: auto; page-break-before: auto; }
 section.part h1 {
   margin: 72mm 0 0;
   text-align: center;
-  font-family: "Songti SC", "STSong", serif;
+  font-family: "Hiragino Sans GB", "STHeiti", "Songti SC", sans-serif;
   font-size: 22pt;
-  font-weight: 500;
-  letter-spacing: 0.28em;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: #1a4f82;
 }
 section.part h1::after {
   content: "";
   display: block;
-  width: 18mm;
+  width: 22mm;
   margin: 8mm auto 0;
-  border-top: 0.9pt solid #7a2e2a;
+  border-top: 3.2pt solid #1f6fb2;
 }
 
 h2 {
   margin: 0 0 0.75em;
+  padding: 5pt 8pt 4.5pt;
   font-size: 16pt;
-  letter-spacing: 0.06em;
-}
-h2::after {
-  content: "";
-  display: block;
-  width: 2.4em;
-  margin-top: 0.38em;
-  border-top: 1.6pt solid #7a2e2a;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: #1f6fb2;
 }
 h3 {
   margin: 1.05em 0 0.35em;
+  padding: 1pt 0 1pt 6pt;
   font-size: 12pt;
   letter-spacing: 0.04em;
+  color: #1a4f82;
+  border-left: 3.2pt solid #1f6fb2;
 }
 p.exercise {
   font-family: "Hiragino Sans GB", "STHeiti", "Songti SC", sans-serif;
@@ -159,10 +188,18 @@ p.exercise {
   line-height: 1.35;
   letter-spacing: 0.04em;
   margin: 1.05em 0 0.35em;
+  padding: 1pt 0 1pt 6pt;
   text-indent: 0;
   text-align: left;
+  color: #c45c12;
+  border-left: 3.2pt solid #e07b2a;
   break-after: avoid;
   page-break-after: avoid;
+}
+section.toc h3 {
+  border-left: none;
+  padding-left: 0;
+  color: #1a4f82;
 }
 section.toc h2 { margin-bottom: 0.45em; }
 section.toc h3 {
@@ -185,7 +222,7 @@ section.toc h3 a.toc-entry { font-weight: 600; }
 section.toc .toc-name { flex: 0 1 auto; }
 section.toc .toc-leader {
   flex: 1 1 auto;
-  border-bottom: 0.6pt dotted #a3988c;
+  border-bottom: 0.6pt dotted #8eb4d4;
   margin: 0 0.4em;
   min-width: 0.8em;
   height: 0;
@@ -201,9 +238,10 @@ section.toc .toc-page {
 
 blockquote {
   margin: 0.55em 0 0.8em;
-  padding: 0.05em 0 0.05em 0.75em;
-  border-left: 1.6pt solid #7a2e2a;
-  color: #2a241f;
+  padding: 0.15em 0.4em 0.15em 0.75em;
+  border-left: 3pt solid #1f6fb2;
+  background: #f3f8fc;
+  color: #1c1916;
   break-inside: avoid;
   page-break-inside: avoid;
 }
@@ -213,51 +251,62 @@ p.tablecap {
   text-align: center;
   text-indent: 0;
   margin: 0.85em 0 0.2em;
+  font-family: "Hiragino Sans GB", "STHeiti", "Songti SC", sans-serif;
   font-size: 10.5pt;
   font-weight: 600;
+  color: #1a4f82;
   break-after: avoid;
   page-break-after: avoid;
 }
 
+/* 三线表：顶线、栏目线、底线；无竖线、无行间横线（课本 / CY/T 170） */
 table {
   width: 100%;
+  max-width: 100%;
+  table-layout: auto;
   border-collapse: collapse;
-  margin: 0.15em 0 0.9em;
+  border-spacing: 0;
+  margin: 0.15em auto 0.9em;
   font-size: 10pt;
   line-height: 1.45;
+  border-top: 1.5pt solid #1c1916;
+  border-bottom: 1.5pt solid #1c1916;
 }
 thead { display: table-header-group; }
 tr { break-inside: avoid; page-break-inside: avoid; }
 th, td {
   border: none;
-  border-bottom: 0.35pt solid #e4ddd2;
-  padding: 3.2pt 5pt;
-  vertical-align: top;
-  text-align: left;
+  padding: 3.6pt 6pt;
+  vertical-align: middle;
+  text-align: center;
   font-weight: 400;
+  overflow-wrap: break-word;
+  word-break: normal;
+  line-break: strict;
 }
 th {
   font-family: "Hiragino Sans GB", "STHeiti", sans-serif;
   font-weight: 600;
   font-size: 10pt;
   letter-spacing: 0.04em;
-  border-top: 1.05pt solid #1c1916;
-  border-bottom: 0.6pt solid #1c1916;
-  padding-top: 4pt;
-  padding-bottom: 3.5pt;
+  color: #1c1916;
+  background: transparent;
+  border-bottom: 0.75pt solid #1c1916;
+  padding-top: 4.5pt;
+  padding-bottom: 4pt;
   white-space: nowrap;
 }
-td { word-break: keep-all; line-break: strict; }
-span.ipa { white-space: nowrap; font-family: "Times New Roman", "Songti SC", serif; }
-tbody tr:last-child td { border-bottom: 1.05pt solid #1c1916; }
+span.ipa { white-space: nowrap; font-family: "Times New Roman", "Songti SC", serif; color: #4e5964; }
+tbody tr:last-child td { border-bottom: none; }
+table.vocab td:first-child {
+  font-family: Arial, "Helvetica Neue", "Hiragino Sans GB", "Songti SC", sans-serif;
+  font-weight: 700;
+  color: #1a4f82;
+  white-space: nowrap;
+}
 table.wide { font-size: 10pt; line-height: 1.35; }
 table.wide th { white-space: normal; }
-table.wide th, table.wide td { padding: 2.4pt 2.6pt; }
-table.vocab { table-layout: fixed; }
-table.vocab col.c1 { width: 22%; }
-table.vocab col.c2 { width: 34%; }
-table.vocab col.c3 { width: 14%; }
-table.vocab col.c4 { width: 30%; }
+table.wide th, table.wide td { padding: 2.6pt 3.2pt; }
 
 figure {
   margin: 0.7em 0 0.9em;
@@ -267,16 +316,17 @@ figure {
 img {
   display: block;
   max-width: 100%;
-  max-height: 158mm;
+  max-height: 200mm;
   margin: 0 auto;
 }
 figcaption {
   margin-top: 0.35em;
   text-align: center;
+  font-family: "Hiragino Sans GB", "STHeiti", "Songti SC", sans-serif;
   font-size: 10.5pt;
   font-weight: 600;
   letter-spacing: 0.02em;
-  color: #3a342c;
+  color: #1a4f82;
 }
 """
 
@@ -345,7 +395,7 @@ def mark_wide_tables(html):
 
 
 def mark_vocab_tables(html):
-    """Give word tables fixed columns so the phonetic column stays readable."""
+    """Mark word tables so headwords can keep textbook styling."""
 
     def repl(match):
         table = match.group(0)
@@ -359,13 +409,7 @@ def mark_vocab_tables(html):
         if heads[:4] != ["词条", "音标", "释义", "说明"]:
             return table
         table = table.replace("<table>", '<table class="vocab">', 1)
-        table = table.replace('<table class="wide">', '<table class="vocab wide">', 1)
-        return re.sub(
-            r'(<table class="vocab[^"]*">)',
-            r'\1<colgroup><col class="c1"><col class="c2"><col class="c3"><col class="c4"></colgroup>',
-            table,
-            count=1,
-        )
+        return table.replace('<table class="wide">', '<table class="vocab wide">', 1)
 
     return re.sub(r"<table\b.*?</table>", repl, html, flags=re.S)
 

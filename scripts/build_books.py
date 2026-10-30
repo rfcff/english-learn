@@ -661,21 +661,53 @@ def measure_text(text):
     return width
 
 
+def _is_cjk(code):
+    return (
+        0x2E80 <= code <= 0x9FFF
+        or 0xF900 <= code <= 0xFAFF
+        or 0xFF00 <= code <= 0xFFEF
+    )
+
+
 def longest_tokens(cell_html):
-    """Unbreakable runs inside a cell.
+    """Widths of the runs inside a cell that truly cannot be broken.
 
     IPA transcriptions are wrapped in ``span.ipa`` with ``white-space: nowrap``,
-    so each of them counts as a single token. Everything else is split on
-    whitespace and punctuation that allows a line break.
+    so each of them counts whole. Latin words, numbers and dates cannot break
+    either. Chinese is different: a line may break between any two characters,
+    so a CJK run only needs room for a couple of characters (plus any closing
+    punctuation that sticks to them), not for the whole sentence. Treating a
+    sixteen-character Chinese cell as unbreakable used to starve the narrow
+    columns of exactly the tables that had room to spare.
     """
     atomic = re.findall(r'<span class="ipa">([^<]*)</span>', cell_html)
     rest = re.sub(r'<span class="ipa">[^<]*</span>', " ", cell_html)
     rest = strip_tags(rest)
-    tokens = list(atomic) + [t for t in re.split(r"[\s,;，；、]+", rest) if t]
-    return [measure_text(t) for t in tokens]
+    widths = [measure_text(t) for t in atomic]
+    for token in re.split(r"[\s,;，；、]+", rest):
+        if not token:
+            continue
+        run = 0.0
+        best = 0.0
+        saw_cjk = False
+        for ch in token:
+            if _is_cjk(ord(ch)):
+                saw_cjk = True
+                run = 0.0
+            else:
+                run += measure_text(ch)
+                best = max(best, run)
+        if saw_cjk:
+            # Any CJK run can wrap; keep room for two characters so a line
+            # never ends up holding a single lonely glyph.
+            best = max(best, 2.0)
+        else:
+            best = max(best, measure_text(token))
+        widths.append(best)
+    return widths
 
 
-def set_column_widths(html):
+def set_column_widths(html, avail_em=43.0):
     """Give every table explicit column widths based on its own content.
 
     Browsers lay out ``table-layout: auto`` from *minimum* content widths. With
@@ -685,8 +717,11 @@ def set_column_widths(html):
     that: each column first claims the width of its longest unbreakable token,
     then the leftover page width is shared in proportion to how much text the
     column actually carries.
+
+    ``avail_em`` is the table's real rendered width in em. Cover tables are
+    narrower than the text block (88%), so they must be measured against a
+    smaller budget or their narrow columns get squeezed into wrapping.
     """
-    avail_em = 43.0  # 152mm text block at 10pt type
     pad = 1.2        # horizontal cell padding, in em
 
     def repl(match):
@@ -718,13 +753,28 @@ def set_column_widths(html):
                 for token in longest_tokens(cell):
                     floor[index] = max(floor[index], token)
 
-        floors = [f + pad for f in floor]
+        floors = [min(f, 10.0) + pad for f in floor]
         total_floor = sum(floors)
         if total_floor >= avail_em:
-            # Pathological table: shrink floors proportionally and give up on
-            # proportional sharing.
-            scale = avail_em / total_floor
-            widths = [f * scale for f in floors]
+            # Not enough room even after capping long columns. Keep every
+            # short column intact (its tokens must not wrap) and squeeze only
+            # the capped long-text columns, which can break mid-run in CJK.
+            short = [i for i in range(columns) if floor[i] <= 10.0]
+            long = [i for i in range(columns) if floor[i] > 10.0]
+            reserved = sum(floors[i] for i in short)
+            if reserved >= avail_em:
+                # Even the short columns alone overflow; fall back to an even
+                # proportional split and accept wrapping everywhere.
+                scale = avail_em / total_floor
+                widths = [f * scale for f in floors]
+            else:
+                widths = [0.0] * columns
+                for i in short:
+                    widths[i] = floors[i]
+                leftover = avail_em - reserved
+                total_long = sum(floors[i] for i in long) or 1.0
+                for i in long:
+                    widths[i] = leftover * floors[i] / total_long
         else:
             soft = [min(d + pad, 16.0) for d in demand]
             extra_need = [max(0.0, soft[i] - floors[i]) for i in range(columns)]
@@ -756,7 +806,6 @@ def build_html(md_path, book_title):
     body = mark_wide_tables(body)
     body = mark_vocab_tables(body)
     body = protect_cell_text(body)
-    body = set_column_widths(body)
     parts = re.split(r"(<h[12]>.*?</h[12]>)", body, flags=re.S)
     items = []
     if parts[0].strip():
@@ -792,6 +841,8 @@ def build_html(md_path, book_title):
         if sec["kind"] == "cover":
             inner = "\n".join(sec["chunks"])
             inner = re.sub(r"<h1>.*?</h1>", "", inner, count=1, flags=re.S)
+            # Cover tables render at 88% of the text block; measure against that.
+            inner = set_column_widths(inner, avail_em=43.0 * 0.88)
             meta = ""
             if "<table" not in inner:
                 meta = '<p class="meta">二〇二六年十月</p>'
@@ -802,10 +853,10 @@ def build_html(md_path, book_title):
                 f"{meta}{inner}</section>"
             )
         elif sec["kind"] == "part":
-            inner = "\n".join(sec["chunks"])
+            inner = set_column_widths("\n".join(sec["chunks"]))
             block = f'<section class="part">{inner}</section>'
         else:
-            inner = "\n".join(sec["chunks"])
+            inner = set_column_widths("\n".join(sec["chunks"]))
             if title == "目录":
                 inner = toc_links(inner)
                 klass = "chapter toc"

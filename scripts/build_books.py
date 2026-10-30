@@ -21,7 +21,7 @@ CN_DIGIT = {ch: i for i, ch in enumerate("零一二三四五六七八九")}
 
 CSS = r"""
 @page {
-  size: A4;
+  size: B5;
   margin: 16mm 16mm 16mm 20mm;
   @bottom-center {
     content: counter(page);
@@ -43,7 +43,7 @@ CSS = r"""
   @bottom-center { content: none; }
 }
 @page cover {
-  size: A4;
+  size: B5;
   margin: 22mm 20mm 20mm 20mm;
   @bottom-center { content: none; }
 }
@@ -116,7 +116,7 @@ section.cover { break-before: auto; page-break-before: auto; }
 .cover table {
   width: 88%;
   margin: 18mm auto 0;
-  font-size: 9pt;
+  font-size: 10pt;
 }
 
 section.part h1 {
@@ -213,7 +213,8 @@ p.tablecap {
   text-align: center;
   text-indent: 0;
   margin: 0.85em 0 0.2em;
-  font-size: 9.5pt;
+  font-size: 10.5pt;
+  font-weight: 600;
   break-after: avoid;
   page-break-after: avoid;
 }
@@ -222,7 +223,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin: 0.15em 0 0.9em;
-  font-size: 9pt;
+  font-size: 10pt;
   line-height: 1.45;
 }
 thead { display: table-header-group; }
@@ -238,7 +239,7 @@ th, td {
 th {
   font-family: "Hiragino Sans GB", "STHeiti", sans-serif;
   font-weight: 600;
-  font-size: 8.5pt;
+  font-size: 10pt;
   letter-spacing: 0.04em;
   border-top: 1.05pt solid #1c1916;
   border-bottom: 0.6pt solid #1c1916;
@@ -247,9 +248,16 @@ th {
   white-space: nowrap;
 }
 td { word-break: keep-all; line-break: strict; }
+span.ipa { white-space: nowrap; font-family: "Times New Roman", "Songti SC", serif; }
 tbody tr:last-child td { border-bottom: 1.05pt solid #1c1916; }
-table.wide { font-size: 7.6pt; line-height: 1.35; }
+table.wide { font-size: 10pt; line-height: 1.35; }
+table.wide th { white-space: normal; }
 table.wide th, table.wide td { padding: 2.4pt 2.6pt; }
+table.vocab { table-layout: fixed; }
+table.vocab col.c1 { width: 22%; }
+table.vocab col.c2 { width: 34%; }
+table.vocab col.c3 { width: 14%; }
+table.vocab col.c4 { width: 30%; }
 
 figure {
   margin: 0.7em 0 0.9em;
@@ -265,7 +273,8 @@ img {
 figcaption {
   margin-top: 0.35em;
   text-align: center;
-  font-size: 9pt;
+  font-size: 10.5pt;
+  font-weight: 600;
   letter-spacing: 0.02em;
   color: #3a342c;
 }
@@ -333,6 +342,48 @@ def mark_wide_tables(html):
         return table
 
     return re.sub(r"<table\b.*?</table>", repl, html, flags=re.S)
+
+
+def mark_vocab_tables(html):
+    """Give word tables fixed columns so the phonetic column stays readable."""
+
+    def repl(match):
+        table = match.group(0)
+        first = re.search(r"<tr\b.*?</tr>", table, re.S)
+        if not first:
+            return table
+        heads = [
+            strip_tags(cell)
+            for cell in re.findall(r"<t[dh][^>]*>(.*?)</t[dh]>", first.group(0), re.S)
+        ]
+        if heads[:4] != ["词条", "音标", "释义", "说明"]:
+            return table
+        table = table.replace("<table>", '<table class="vocab">', 1)
+        table = table.replace('<table class="wide">', '<table class="vocab wide">', 1)
+        return re.sub(
+            r'(<table class="vocab[^"]*">)',
+            r'\1<colgroup><col class="c1"><col class="c2"><col class="c3"><col class="c4"></colgroup>',
+            table,
+            count=1,
+        )
+
+    return re.sub(r"<table\b.*?</table>", repl, html, flags=re.S)
+
+
+def protect_cell_text(html):
+    """Keep a mark with its word, and keep each phonetic transcription intact."""
+
+    def repl(match):
+        inner = match.group(2)
+        inner = re.sub(r"([★○◆●]) ", "\\1\u00a0", inner)
+        inner = re.sub(
+            r"/[^/<>\s]+/",
+            lambda token: f'<span class="ipa">{token.group(0)}</span>',
+            inner,
+        )
+        return match.group(1) + inner + match.group(3)
+
+    return re.sub(r"(<td[^>]*>)(.*?)(</td>)", repl, html, flags=re.S)
 
 
 def decorate(html):
@@ -492,6 +543,8 @@ def build_html(md_path, book_title):
     body = markdown.markdown(text, extensions=["tables", "sane_lists"])
     body = decorate(body)
     body = mark_wide_tables(body)
+    body = mark_vocab_tables(body)
+    body = protect_cell_text(body)
     parts = re.split(r"(<h[12]>.*?</h[12]>)", body, flags=re.S)
     items = []
     if parts[0].strip():
@@ -704,7 +757,7 @@ def main():
     )
     write_book(
         ROOT / "小学英语-KET-PET整理.md",
-        "小学英语、PET、KET 整理",
+        "小学英语 · PET · KET",
         "ket-pet-book.html",
         ROOT / "小学英语-KET-PET整理.pdf",
     )

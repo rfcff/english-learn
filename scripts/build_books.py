@@ -2,9 +2,11 @@
 """Typeset the handbooks as printed books and write PDFs via headless Chrome."""
 
 import html as html_lib
+import os
 import re
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 sys.path.insert(0, "/tmp/pylibs")
@@ -12,9 +14,58 @@ sys.path.insert(0, "/tmp/pylibs")
 import markdown
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT = Path("/tmp/english-learn-pdf")
+
+
+def find_chrome():
+    """Locate a headless-capable Chrome/Chromium binary for the current OS."""
+    if os.name == "nt":
+        candidates = [
+            r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+            r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
+            os.path.expandvars(r"%LOCALAPPDATA%\Google\Chrome\Application\chrome.exe"),
+            r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
+            r"C:\Program Files\Microsoft\Edge\Application\msedge.exe",
+        ]
+    elif sys.platform == "darwin":
+        candidates = [
+            "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+            "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge",
+        ]
+    else:
+        candidates = [
+            "/usr/bin/google-chrome",
+            "/usr/bin/chromium-browser",
+            "/usr/bin/chromium",
+        ]
+    for path in candidates:
+        if path and Path(path).exists():
+            return path
+    raise SystemExit("No Chrome/Chromium/Edge found; cannot print PDF.")
+
+
+def find_markdown_lib():
+    """Import markdown from the isolated virtualenv if the default env lacks it."""
+    try:
+        return __import__("markdown")
+    except ImportError:
+        pass
+    home = Path(os.path.expanduser("~"))
+    guesses = [
+        home / ".workbuddy/binaries/python/envs/default/Lib/site-packages",
+        home / ".workbuddy/binaries/python/envs/default/lib/python3.13/site-packages",
+    ]
+    for path in guesses:
+        if path.exists():
+            sys.path.insert(0, str(path))
+            return __import__("markdown")
+    raise SystemExit("markdown module not found; install it in the isolated venv.")
+
+
+markdown = find_markdown_lib()
+
+OUT = Path(tempfile.gettempdir()) / "english-learn-pdf"
 OUT.mkdir(exist_ok=True)
-CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+CHROME = find_chrome()
 IMG = ROOT.as_uri() + "/images/"
 
 CN_DIGIT = {ch: i for i, ch in enumerate("零一二三四五六七八九")}
@@ -582,6 +633,122 @@ def tighten_latin(fragment):
     return re.sub(r"(<h1[^>]*>)(.*?)(</h1>)", repl, fragment, flags=re.S)
 
 
+def measure_text(text):
+    """Estimate rendered width in em units.
+
+    CJK characters occupy a full em; Latin letters and digits about half.
+    Punctuation and spaces are narrower. The result drives column widths, so
+    overestimating slightly is safer than underestimating.
+    """
+    width = 0.0
+    for ch in text:
+        code = ord(ch)
+        if code == 0x00A0:
+            width += 0.3
+        elif 0x2E80 <= code <= 0x9FFF or 0xF900 <= code <= 0xFAFF or 0xFF00 <= code <= 0xFFEF:
+            width += 1.0
+        elif 0x0250 <= code <= 0x02AF:
+            # IPA symbols are roughly Latin width
+            width += 0.55
+        elif ch in "ijlI.,;:!|'` ":
+            width += 0.28
+        elif ch in "mwMW":
+            width += 0.85
+        elif ch.isupper():
+            width += 0.68
+        else:
+            width += 0.52
+    return width
+
+
+def longest_tokens(cell_html):
+    """Unbreakable runs inside a cell.
+
+    IPA transcriptions are wrapped in ``span.ipa`` with ``white-space: nowrap``,
+    so each of them counts as a single token. Everything else is split on
+    whitespace and punctuation that allows a line break.
+    """
+    atomic = re.findall(r'<span class="ipa">([^<]*)</span>', cell_html)
+    rest = re.sub(r'<span class="ipa">[^<]*</span>', " ", cell_html)
+    rest = strip_tags(rest)
+    tokens = list(atomic) + [t for t in re.split(r"[\s,;，；、]+", rest) if t]
+    return [measure_text(t) for t in tokens]
+
+
+def set_column_widths(html):
+    """Give every table explicit column widths based on its own content.
+
+    Browsers lay out ``table-layout: auto`` from *minimum* content widths. With
+    Chinese text that minimum is almost nothing, so a column holding ``I`` or
+    ``me`` gets the same share as one holding ``形容词性物主``, and long cells
+    wrap while short ones sit in empty space. Measuring the real content fixes
+    that: each column first claims the width of its longest unbreakable token,
+    then the leftover page width is shared in proportion to how much text the
+    column actually carries.
+    """
+    avail_em = 43.0  # 152mm text block at 10pt type
+    pad = 1.2        # horizontal cell padding, in em
+
+    def repl(match):
+        table = match.group(0)
+        tag_match = re.match(r"<table\b[^>]*>", table)
+        if not tag_match:
+            return table
+        rows = re.findall(r"<tr\b.*?</tr>", table, flags=re.S)
+        if not rows:
+            return table
+
+        raw_rows = []
+        for row in rows:
+            cells = re.findall(r"<t[dh][^>]*>(.*?)</t[dh]>", row, flags=re.S)
+            if cells:
+                raw_rows.append(cells)
+        columns = max(len(row) for row in raw_rows)
+        if columns < 2:
+            return table
+
+        demand = [0.0] * columns
+        floor = [0.0] * columns
+        for row in raw_rows:
+            for index, cell in enumerate(row):
+                if index >= columns:
+                    continue
+                text = strip_tags(cell)
+                demand[index] = max(demand[index], measure_text(text))
+                for token in longest_tokens(cell):
+                    floor[index] = max(floor[index], token)
+
+        floors = [f + pad for f in floor]
+        total_floor = sum(floors)
+        if total_floor >= avail_em:
+            # Pathological table: shrink floors proportionally and give up on
+            # proportional sharing.
+            scale = avail_em / total_floor
+            widths = [f * scale for f in floors]
+        else:
+            soft = [min(d + pad, 16.0) for d in demand]
+            extra_need = [max(0.0, soft[i] - floors[i]) for i in range(columns)]
+            spare = avail_em - total_floor
+            total_extra = sum(extra_need)
+            widths = list(floors)
+            if total_extra > 0:
+                for i in range(columns):
+                    widths[i] += spare * extra_need[i] / total_extra
+
+        share = [100.0 * w / avail_em for w in widths]
+
+        colgroup = "<colgroup>" + "".join(
+            f'<col style="width:{s:.2f}%">' for s in share
+        ) + "</colgroup>"
+
+        tag = tag_match.group(0)
+        if "table-layout" not in tag:
+            tag = tag[:-1] + ' style="table-layout:fixed">'
+        return tag + colgroup + table[tag_match.end():]
+
+    return re.sub(r"<table\b.*?</table>", repl, html, flags=re.S)
+
+
 def build_html(md_path, book_title):
     text = md_path.read_text()
     body = markdown.markdown(text, extensions=["tables", "sane_lists"])
@@ -589,6 +756,7 @@ def build_html(md_path, book_title):
     body = mark_wide_tables(body)
     body = mark_vocab_tables(body)
     body = protect_cell_text(body)
+    body = set_column_widths(body)
     parts = re.split(r"(<h[12]>.*?</h[12]>)", body, flags=re.S)
     items = []
     if parts[0].strip():

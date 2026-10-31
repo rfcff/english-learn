@@ -247,6 +247,16 @@ p.exercise {
   break-after: avoid;
   page-break-after: avoid;
 }
+section.toc {
+  column-count: 2;
+  column-gap: 8mm;
+  column-rule: 0.5pt solid #dfe8f0;
+}
+section.toc h2, section.toc h3 {
+  break-after: avoid;
+  page-break-after: avoid;
+}
+section.toc ul { break-inside: avoid; page-break-inside: avoid; }
 section.toc h3 {
   border-left: none;
   padding-left: 0;
@@ -537,12 +547,53 @@ def toc_links(html):
     return re.sub(r'<a href="([^"]+)">([^<]*)</a>', repl, html)
 
 
-def heading_pages(pdf_path):
-    import fitz
+def collect_headings(doc):
+    """Collect (page, size, title) for every heading line in the body.
 
-    doc = fitz.open(pdf_path)
-    found = {}
+    Three levels are wanted: part titles (h1, ~22pt), chapter titles (h2, 16pt)
+    and section titles (h3, 12pt). Body text sits at 10.5pt, so a 10.8pt floor
+    separates headings from prose. Two things must be excluded: the printed
+    table of contents (its entries repeat every heading) and the orange
+    “习题” paragraphs, which share the h3 size but are not headings.
+    """
+    ORANGE = 0xC45C12
+
+    toc_start = None
+    toc_end = None
     for index, page in enumerate(doc):
+        for block in page.get_text("dict")["blocks"]:
+            if block.get("type") != 0:
+                continue
+            for line in block["lines"]:
+                text = "".join(s["text"] for s in line["spans"]).strip()
+                if text == "目录":
+                    toc_start = index
+    if toc_start is not None:
+        for index in range(toc_start + 1, doc.page_count):
+            page = doc[index]
+            hit = False
+            for block in page.get_text("dict")["blocks"]:
+                if block.get("type") != 0:
+                    continue
+                for line in block["lines"]:
+                    size = max((s["size"] for s in line["spans"]), default=0)
+                    if size >= 20:
+                        toc_end = index
+                        hit = True
+                        break
+                if hit:
+                    break
+            if hit:
+                break
+    if toc_end is None:
+        toc_end = toc_start + 1 if toc_start is not None else 0
+
+    found = []
+    for index, page in enumerate(doc):
+        if index == 0:
+            continue  # cover: its 12pt subtitle would read as a heading
+        if toc_start is not None and toc_start <= index < toc_end:
+            continue
         lines = []
         for block in page.get_text("dict")["blocks"]:
             if block.get("type") != 0:
@@ -552,7 +603,9 @@ def heading_pages(pdf_path):
                 if not spans:
                     continue
                 size = max(span["size"] for span in spans)
-                if size < 14.5:
+                if size < 10.8:
+                    continue
+                if any(span.get("color") == ORANGE for span in spans):
                     continue
                 text = "".join(span["text"] for span in spans).strip()
                 if text:
@@ -568,8 +621,18 @@ def heading_pages(pdf_path):
                 merged[-1][1] += text
             else:
                 merged.append([y, text, size])
-        for _y, text, _size in merged:
-            found.setdefault(norm(text), index + 1)
+        for _y, text, size in merged:
+            found.append((index + 1, size, norm(text)))
+    return found
+
+
+def heading_pages(pdf_path):
+    import fitz
+
+    doc = fitz.open(pdf_path)
+    found = {}
+    for page, size, title in collect_headings(doc):
+        found.setdefault(title, page)
     doc.close()
     return found
 
@@ -617,6 +680,45 @@ def toc_numbers(pdf_path):
                     numbers.setdefault(title, int(matched.group(1)))
     doc.close()
     return numbers
+
+
+def add_heading_ids(html):
+    """Give every heading the slug id that the table of contents links to.
+
+    The TOC is authored in Markdown with GitHub-style anchors such as
+    ``#第一章-人体部位``. Headless Chrome keeps those ``href`` values but the
+    headings themselves carry no ``id``, so every TOC entry pointed at nothing
+    and the printed PDF had no clickable links. Adding the same slug to each
+    heading makes them resolve; PyMuPDF then carries them over as PDF links.
+    """
+
+    def slug(text):
+        out = strip_tags(text).strip().lower()
+        out = re.sub(r"[`*_~\[\]()]", "", out)
+        out = re.sub(r"[^\w\u4e00-\u9fff\s-]", "", out)
+        out = out.replace(" ", "-")
+        out = re.sub(r"-+", "-", out)
+        return out.strip("-")
+
+    seen = {}
+
+    def repl(match):
+        tag, attrs, inner = match.group(1), match.group(2), match.group(3)
+        if 'id="' in attrs:
+            return match.group(0)
+        base = slug(inner) or "section"
+        # Duplicate slugs get a numeric suffix, matching GitHub's behaviour.
+        if base in seen:
+            seen[base] += 1
+            anchor = f"{base}-{seen[base]}"
+        else:
+            seen[base] = 0
+            anchor = base
+        return f'<{tag}{attrs} id="{anchor}">{inner}</{tag}>'
+
+    return re.sub(
+        r"<(h[1-4])([^>]*)>(.*?)</\1>", repl, html, flags=re.S
+    )
 
 
 def tighten_latin(fragment):
@@ -879,6 +981,7 @@ def build_html(md_path, book_title):
 </body>
 </html>
 """
+    html = add_heading_ids(html)
     return tighten_latin(html)
 
 
@@ -887,50 +990,28 @@ def add_outline(pdf_path):
     import fitz
 
     doc = fitz.open(pdf_path)
-    found = []
-    for index, page in enumerate(doc):
-        if index == 0:
-            continue
-        lines = []
-        for block in page.get_text("dict")["blocks"]:
-            if block.get("type") != 0:
-                continue
-            for line in block["lines"]:
-                spans = line["spans"]
-                if not spans:
-                    continue
-                size = max(span["size"] for span in spans)
-                if size < 14.5:
-                    continue
-                text = "".join(span["text"] for span in spans).strip()
-                if text:
-                    lines.append((line["bbox"][1], text, size))
-        lines.sort()
-        merged = []
-        for y, text, size in lines:
-            if (
-                merged
-                and abs(y - merged[-1][0]) < 30
-                and abs(size - merged[-1][2]) < 2
-            ):
-                merged[-1][1] += text
-            else:
-                merged.append([y, text, size])
-        for _y, text, size in merged:
-            found.append((index + 1, size, norm(text)))
+    found = collect_headings(doc)
 
     toc = []
-    in_part = False
     seen = set()
+    has_part = any(re.match(r'^第[一二三四五六七八九十]+部分', t) for _p, _s, t in found)
+    last = 0
     for page, size, title in found:
         if title in seen or title == "习题":
             continue
         seen.add(title)
-        if size >= 20:
-            toc.append([1, title, page])
-            in_part = True
+        if re.match(r'^第[一二三四五六七八九十]+部分', title):
+            level = 1
+        elif re.match(r'^第[一二三四五六七八九十]+章', title):
+            level = 2 if has_part else 1
+        elif size >= 14.5:
+            level = 2 if has_part else 1
         else:
-            toc.append([2 if in_part else 1, title, page])
+            level = 3 if has_part else 2
+        # PDF outlines may only deepen one level at a time.
+        level = min(level, last + 1)
+        last = level
+        toc.append([level, title, page])
     doc.set_toc(toc, collapse=0)
     doc.set_pagemode("UseOutlines")
     tmp = pdf_path.with_suffix(".outline.pdf")
@@ -995,16 +1076,16 @@ def write_book(md_path, book_title, html_name, pdf_path):
 
 def main():
     write_book(
-        ROOT / "小学英语词汇整理手册-精简本.md",
-        "小学英语词汇 · 精简本",
+        ROOT / "小学英语辅导手册-学生本.md",
+        "小学英语辅导手册 · 学生本",
         "slim-book.html",
-        ROOT / "小学英语词汇整理手册-精简本.pdf",
+        ROOT / "小学英语辅导手册-学生本.pdf",
     )
     write_book(
-        ROOT / "小学英语词汇整理手册.md",
-        "小学英语词汇整理手册",
+        ROOT / "小学英语辅导手册.md",
+        "小学英语辅导手册",
         "full-book.html",
-        ROOT / "小学英语词汇整理手册.pdf",
+        ROOT / "小学英语辅导手册.pdf",
     )
     write_book(
         ROOT / "初中英语学习辅导手册.md",
@@ -1019,10 +1100,10 @@ def main():
         ROOT / "自然拼读.pdf",
     )
     write_book(
-        ROOT / "小学英语-KET-PET整理.md",
-        "小学英语 · PET · KET",
+        ROOT / "小学英语-KET-PET辅导手册.md",
+        "小学英语 · KET · PET 辅导手册",
         "ket-pet-book.html",
-        ROOT / "小学英语-KET-PET整理.pdf",
+        ROOT / "小学英语-KET-PET辅导手册.pdf",
     )
 
 

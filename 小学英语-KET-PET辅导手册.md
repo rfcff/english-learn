@@ -5,6 +5,8 @@
 | 初稿 | 2026/10/30 | 广州小学教科书单词，以及 KET · PET 的考试内容 |
 | 第二版 | 2026/10/31 | 更名为《小学英语-KET-PET辅导手册》 |
 | 第三版 | 2026/10/31 | 记词方法由 3 章摘要扩为 13 章全文，与主册一致；后续章号顺延，全书 41 章 |
+| 第四版 | 2026/10/31 | 同步主册：23 个重复词合并、第38章删 7 词并 3 处内部重复、配对表计数统一 |
+| 第五版 | 2026/10/31 | 同步主册音标勘误：water、dog、coffee、fall 美式音标 |
 
 ---
 
@@ -465,7 +467,7 @@
 
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
-| ★ cold | /kəʊld/ | 感冒；冷的 | 搭配 have a cold，必须加 a |
+| ★ cold | /kəʊld/ | 感冒；冷的 | 搭配 have a cold，必须加 a；与 old 押韵 |
 | ★ fever | /ˈfiːvə(r)/ | 发烧 | 搭配 have a fever |
 | ★ headache | /ˈhedeɪk/ | 头痛 | head ＋ ache |
 | ★ toothache | /ˈtuːθeɪk/ | 牙痛 | tooth ＋ ache |
@@ -660,7 +662,7 @@ member 这个词值得停一下。它来自拉丁语 membrum，意思是“部�
 | ○ sofa | /ˈsəʊfə/ | 沙发 | 一二年级口语先会说 |
 | ○ fridge | /frɪdʒ/ | 冰箱 | refrigerator 的口语说法 |
 | ○ closet | /ˈklɒzɪt/ | 衣柜 | 一二年级口语先会说 |
-| ○ floor | /flɔː(r)/ | 地板 | 搭配 on the floor |
+| ○ floor | /flɔː(r)/ | 地板；楼层 | 搭配 on the floor；也表示“第几层” |
 | ○ table | /ˈteɪbl/ | 桌子 | 吃饭的桌子。课桌用 desk |
 
 ### 2.6 一张家庭关系图
@@ -732,7 +734,7 @@ member 这个词值得停一下。它来自拉丁语 membrum，意思是“部�
 | ★ fruit | /fruːt/ | 水果 | 泛指时不可数 |
 | ★ apple | /ˈæpl/ | 苹果 | 用 an apple |
 | ★ banana | /bəˈnɑːnə/ | 香蕉 | 三个 a，重音在中间 |
-| ★ orange | 英 /ˈɒrɪndʒ/　美 /ˈɔːrɪndʒ/ | 橙子；橙色 | 一词两义 |
+| ★ orange | 英 /ˈɒrɪndʒ/　美 /ˈɔːrɪndʒ/ | 橙子；橙色 | 一词两义：水果与颜色 |
 | ★ pear | /peə(r)/ | 梨 | 与 pair 同音 |
 | ★ grape | /ɡreɪp/ | 葡萄 | 常用复数 |
 | ★ watermelon | /ˈwɔːtəmelən/ | 西瓜 | water ＋ melon |
@@ -747,11 +749,11 @@ member 这个词值得停一下。它来自拉丁语 membrum，意思是“部�
 
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
-| ★ water | 英 /ˈwɔːtə(r)/　美 /ˈwɔːtər/ | 水 | 不可数 |
+| ★ water | 英 /ˈwɔːtə(r)/　美 /ˈwɑːtər/ | 水 | 不可数 |
 | ★ juice | /dʒuːs/ | 果汁 | 不可数 |
 | ★ tea | /tiː/ | 茶 | 与 tee 同音 |
 | ○ cola | /ˈkəʊlə/ | 可乐 | 口语也说 coke |
-| ◆ coffee | 英 /ˈkɒfi/　美 /ˈkɔːfi/ | 咖啡 | 双 f，不可数 |
+| ◆ coffee | 英 /ˈkɒfi/　美 /ˈkɑːfi/ | 咖啡 | 双 f，不可数 |
 
 ### 3.5 零食与调味
 
@@ -817,7 +819,7 @@ fish 特殊：指鱼肉不可数，指条数可数但复数仍写 fish。
 | ★ animal | /ˈænɪml/ | 动物 | 重音在首 |
 | ★ pet | /pet/ | 宠物 | 与 net、wet 押韵 |
 | ★ cat | /kæt/ | 猫 | 闭音节，a 读 /æ/ |
-| ★ dog | 英 /dɒɡ/　美 /dɔːɡ/ | 狗 | 英音短促，美音拉长 |
+| ★ dog | 英 /dɒɡ/　美 /dɑːɡ/ | 狗 | 英音短促，美音拉长 |
 | ★ rabbit | /ˈræbɪt/ | 兔子 | 双 b |
 | ★ bird | 英 /bɜːd/　美 /bɜːrd/ | 鸟 | ir 读 /ɜː/ |
 | ○ mouse | /maʊs/ | 老鼠 | 复数 mice |
@@ -917,11 +919,10 @@ f 变 ves：wolf → wolves，leaf → leaves，knife → knives。
 
 ### 5.2 扩展色
 
-表 5-2　扩展色（7 条）
+表 5-2　扩展色（6 条）
 
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
-| ★ orange | /ˈɒrɪndʒ/ | 橙色；橙子 | 与水果同形 |
 | ★ pink | /pɪŋk/ | 粉色 | 与 sink、link 押韵 |
 | ★ brown | /braʊn/ | 棕色 | ow 读 /aʊ/ |
 | ★ purple | /ˈpɜːpl/ | 紫色 | ur 读 /ɜː/ |
@@ -1030,7 +1031,7 @@ f 变 ves：wolf → wolves，leaf → leaves，knife → knives。
 
 ### 6.4 百与序数
 
-表 6-4　百、序数与数量词（9 条）
+表 6-4　百、序数与数量词（6 条）
 
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
@@ -1038,10 +1039,7 @@ f 变 ves：wolf → wolves，leaf → leaves，knife → knives。
 | ★ number | /ˈnʌmbə(r)/ | 数字；号码 | b 不发音 |
 | ○ zero | /ˈzɪərəʊ/ | 零 | 电话号码中常读字母 O |
 | ○ first | /fɜːst/ | 第一 | 序数词，前面加 the |
-| ○ second | /ˈsekənd/ | 第二 | 也表示“秒” |
 | ○ third | /θɜːd/ | 第三 | ir 读 /ɜː/ |
-| ○ half | /hɑːf/ | 一半 | 复数 halves |
-| ◆ quarter | /ˈkwɔːtə(r)/ | 四分之一；一刻钟 | qu 读 /kw/ |
 | ◆ double | /ˈdʌbl/ | 两倍；双的 | 搭配 double bed |
 
 ### 6.5 teen 与 ty 的听力分辨
@@ -1124,7 +1122,7 @@ f 变 ves：wolf → wolves，leaf → leaves，knife → knives。
 
 ### 7.1 场所
 
-表 7-1　校内场所（13 条）
+表 7-1　校内场所（12 条）
 
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
@@ -1132,11 +1130,10 @@ f 变 ves：wolf → wolves，leaf → leaves，knife → knives。
 | ★ classroom | /ˈklɑːsruːm/ | 教室 | class ＋ room |
 | ★ library | /ˈlaɪbrəri/ | 图书馆 | 两个 r |
 | ★ playground | /ˈpleɪɡraʊnd/ | 操场 | play ＋ ground |
-| ★ gym | /dʒɪm/ | 体育馆 | g 读 /dʒ/ |
+| ★ gym | /dʒɪm/ | 体育馆；健身房 | g 读 /dʒ/ |
 | ○ art room | /ɑːt ruːm/ | 美术教室 | art ＋ room |
 | ○ music room | /ˈmjuːzɪk ruːm/ | 音乐教室 | music ＋ room |
 | ○ wall | /wɔːl/ | 墙 | 与 ball 押韵 |
-| ○ floor | /flɔː(r)/ | 地板；楼层 | 也表示“第几层” |
 | ★ window | /ˈwɪndəʊ/ | 窗户 | 重音在首 |
 | ★ door | /dɔː(r)/ | 门 | 与 four 押韵 |
 | ◆ office | /ˈɒfɪs/ | 办公室 | 教师办公室写 teachers' office |
@@ -1144,14 +1141,13 @@ f 变 ves：wolf → wolves，leaf → leaves，knife → knives。
 
 ### 7.2 人员
 
-表 7-2　校内人员（4 条）
+表 7-2　校内人员（3 条）
 
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
-| ★ teacher | 英 /ˈtiːtʃə(r)/　美 /ˈtiːtʃər/ | 老师 | teach ＋ -er |
-| ★ student | 英 /ˈstjuːdnt/　美 /ˈstuːdnt/ | 学生 | 英音有 /j/，美音没有 |
+| ★ teacher | 英 /ˈtiːtʃə(r)/　美 /ˈtiːtʃər/ | 老师；教师 | teach ＋ -er |
+| ★ student | 英 /ˈstjuːdnt/　美 /ˈstuːdnt/ | 学生 | 英音有 /j/，美音没有；study ＋ -ent |
 | ○ classmate | /ˈklɑːsmeɪt/ | 同学 | class ＋ mate |
-| ★ friend | /frend/ | 朋友 | ie 读 /e/ |
 
 student 和 pupil 都表示学生，但范围不同。student 泛指，从小学到大学都能用，美式更常用；pupil 特指中小学生，英式教材里常见。两个词都出现在 KET 词汇表里，认读时不必纠结，写作时用 student 更稳妥。
 
@@ -1207,12 +1203,12 @@ student 和 pupil 都表示学生，但范围不同。student 泛指，从小学
 | ○ homework | /ˈhəʊmwɜːk/ | 家庭作业 | 不可数 |
 | ★ read | /riːd/ | 读 | 过去式读 /red/ |
 | ★ write | /raɪt/ | 写 | w 不发音，与 right 同音 |
-| ★ draw | /drɔː/ | 画 | aw 读 /ɔː/ |
+| ★ draw | /drɔː/ | 画；平局 | aw 读 /ɔː/；一词三义：画、拉、平局 |
 | ★ listen | /ˈlɪsn/ | 听 | t 不发音 |
 | ★ speak | /spiːk/ | 说 | ea 读 /iː/ |
 | ◆ learn | /lɜːn/ | 学习 | 过去式 learned 或 learnt |
 | ◆ study | /ˈstʌdi/ | 学习；研究 | 复数 studies |
-| ◆ practise | /ˈpræktɪs/ | 练习 | 英式动词拼写。美式用 practice |
+| ◆ practise | /ˈpræktɪs/ | 练习 | 英式动词拼写，美式用 practice；搭配 practise doing |
 
 ### 7.6 考试与成绩
 
@@ -1303,7 +1299,7 @@ write 的 w 不发音，是拼写和读音脱节最典型的词之一。同类�
 | ★ wear | /weə(r)/ | 穿着 | 强调状态 |
 | ○ put on | /pʊt ɒn/ | 穿上 | 强调动作 |
 | ○ try on | /traɪ ɒn/ | 试穿 | 代词放中间，try it on |
-| ◆ fit | /fɪt/ | 合身 | 搭配 It fits me well |
+| ◆ fit | /fɪt/ | 合身；健康的 | It fits me well；keep fit |
 | ◆ size | /saɪz/ | 尺码 | 搭配 What size do you wear? |
 
 wear 和 put on 的区别，学生常分不清。一句话可以说明白：wear 是“穿着”这个状态，put on 是“穿上”这个动作。早上出门说 I put on my coat，一整天说 I am wearing a coat。
@@ -1338,12 +1334,12 @@ shoes、socks、gloves、trousers、shorts、jeans、boots，凡是成对或成�
 | ★ spring | /sprɪŋ/ | 春天 | spr 三个辅音连读，别加元音 |
 | ★ summer | /ˈsʌmə(r)/ | 夏天 | 双 m |
 | ★ autumn | 英 /ˈɔːtəm/　美 /ˈɔːtəm/ | 秋天 | 英式常用，词尾 n 不发音 |
-| ★ fall | 英 /fɔːl/　美 /fɔːl/ | 秋天 | 美式常用，也表示“落下” |
+| ★ fall | 英 /fɔːl/　美 /fɑːl/ | 秋天 | 美式常用，也表示“落下” |
 | ★ winter | /ˈwɪntə(r)/ | 冬天 | 与 winner 只差一个 t |
 
 ### 9.2 天气形容词
 
-表 9-2　天气形容词（12 条）
+表 9-2　天气形容词（11 条）
 
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
@@ -1353,7 +1349,6 @@ shoes、socks、gloves、trousers、shorts、jeans、boots，凡是成对或成�
 | ★ rainy | /ˈreɪni/ | 下雨的 | rain ＋ y |
 | ★ snowy | /ˈsnəʊi/ | 下雪的 | snow ＋ y |
 | ★ hot | 英 /hɒt/　美 /hɑːt/ | 热的 | 与 pot 押韵 |
-| ★ cold | /kəʊld/ | 冷的 | 与 old 押韵 |
 | ★ warm | /wɔːm/ | 温暖的 | ar 读 /ɔː/ |
 | ★ cool | /kuːl/ | 凉爽的 | 也表示“酷” |
 | ◆ wet | /wet/ | 湿的 | 与 pet 押韵 |
@@ -1461,24 +1456,23 @@ Wednesday 这个拼写，学生几乎人人都错过。可以说一句来历：�
 
 ### 10.4 相对时间与日期
 
-表 10-4　相对时间（14 条）
+表 10-4　相对时间（13 条）
 
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
 | ★ today | /təˈdeɪ/ | 今天 | to ＋ day，重音在后 |
-| ★ tomorrow | /təˈmɒrəʊ/ | 明天 | 双 m 双 r |
-| ★ yesterday | /ˈjestədeɪ/ | 昨天 | 重音在首 |
+| ★ tomorrow | /təˈmɒrəʊ/ | 明天 | 双 m 双 r；最基础的将来时间词 |
+| ★ yesterday | /ˈjestədeɪ/ | 昨天 | 重音在首；最基础的过去时间词 |
 | ★ week | /wiːk/ | 星期；周 | 与 weak 同音 |
 | ○ weekend | /ˌwiːkˈend/ | 周末 | week ＋ end |
 | ○ month | /mʌnθ/ | 月份 | 复数 months |
 | ○ year | /jɪə(r)/ | 年 | 与 ear 押韵 |
 | ○ hour | /ˈaʊə(r)/ | 小时 | h 不发音，用 an hour |
 | ○ minute | /ˈmɪnɪt/ | 分钟 | 与 minute（微小的）拼写同、读音异 |
-| ★ half | /hɑːf/ | 一半；半小时 | 半小时 half an hour |
-| ★ quarter | /ˈkwɔːtə(r)/ | 一刻钟；四分之一 | 一刻钟 a quarter of an hour |
-| ◆ second | /ˈsekənd/ | 秒 | 与序数词同形 |
-| ◆ past | /pɑːst/ | 过（几点几分） | 分钟数不超过 30 时用 |
-| ◆ to | /tuː/ | 差（几分钟到几点） | 分钟数超过 30 时用 |
+| ★ half | /hɑːf/ | 一半；半小时 | 复数 halves；半小时 half an hour |
+| ★ quarter | /ˈkwɔːtə(r)/ | 四分之一；一刻钟 | qu 读 /kw/；一刻钟 a quarter of an hour |
+| ◆ second | /ˈsekənd/ | 第二；秒 | 序数词与时间单位同形 |
+| ◆ past | /pɑːst/ | 过（几点几分）；经过 | 分钟数不超过 30 时用；walk past the bank |
 
 ### 10.5 时刻的三种说法
 
@@ -1521,7 +1515,7 @@ quarter 表示四分之一，来自拉丁语 quartus（第四）。同族的 qua
 | ○ bicycle | /ˈbaɪsɪkl/ | 自行车 | bi-（两）＋ cycle（轮） |
 | ○ scooter | /ˈskuːtə(r)/ | 滑板车 | 一年级口语先会说。Here's my scooter |
 | ★ car | 英 /kɑː(r)/　美 /kɑːr/ | 小汽车 | ar 读 /ɑː/ |
-| ★ train | /treɪn/ | 火车 | 与 rain 押韵 |
+| ★ train | /treɪn/ | 火车；训练 | 与 rain 押韵 |
 | ★ plane | /pleɪn/ | 飞机 | 与 plain 同音 |
 | ★ ship | /ʃɪp/ | 轮船 | 与 sheep 长短音对比 |
 | ★ boat | /bəʊt/ | 小船 | oa 读 /əʊ/ |
@@ -1609,12 +1603,10 @@ airport 拆开是 air（空中）＋ port（港口），即空中的港口。por
 
 ### 12.1 校园与医疗
 
-表 12-1　校园与医疗（9 条）
+表 12-1　校园与医疗（7 条）
 
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
-| ★ teacher | /ˈtiːtʃə(r)/ | 教师 | teach ＋ -er |
-| ★ student | /ˈstjuːdnt/ | 学生 | study ＋ -ent |
 | ★ pupil | 英 /ˈpjuːpl/　美 /ˈpjuːpl/ | 小学生 | 英式说法，也指“瞳孔” |
 | ★ doctor | 英 /ˈdɒktə(r)/　美 /ˈdɑːktər/ | 医生 | 与 daughter 押韵 |
 | ★ nurse | 英 /nɜːs/　美 /nɜːrs/ | 护士 | ur 读 /ɜː/ |
@@ -1715,7 +1707,7 @@ job 和 work 的区别也要讲清。job 可数，a job、two jobs；work 不可
 |---|---|---|---|
 | ★ sad | /sæd/ | 伤心的 | 与 bad 押韵 |
 | ★ angry | /ˈæŋɡri/ | 生气的 | 与 hungry 只差首字母 |
-| ★ tired | /ˈtaɪəd/ | 疲倦的 | 与 tried 拼写相近 |
+| ★ tired | /ˈtaɪəd/ | 疲倦的；累的 | 与 tried 拼写相近 |
 | ★ bored | /bɔːd/ | 无聊的 | 与 board 同音 |
 | ○ worried | /ˈwʌrid/ | 担心的 | worry 变 y 为 i 加 ed |
 | ○ afraid | /əˈfreɪd/ | 害怕的 | 搭配 be afraid of |
@@ -1725,14 +1717,11 @@ job 和 work 的区别也要讲清。job 可数，a job、two jobs；work 不可
 
 ### 13.3 身体感受
 
-表 13-3　身体感受（4 条）
+表 13-3　身体感受（1 条）
 
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
-| ★ hungry | /ˈhʌŋɡri/ | 饿的 | 与 angry 只差首字母 |
-| ★ thirsty | /ˈθɜːsti/ | 渴的 | th 咬舌，ir 读 /ɜː/ |
 | ★ ill | 英 /ɪl/　美 /ɪl/ | 生病的 | 英式说法，美式用 sick |
-| ★ hurt | /hɜːt/ | 疼痛 | My leg hurts |
 
 ### 13.4 询问与应答
 
@@ -1796,7 +1785,7 @@ nervous、confident、famous 都以 -ous 结尾，意思是充满某种性质。
 
 ### 14.2 比赛与输赢
 
-表 14-2　比赛与输赢（16 条）
+表 14-2　比赛与输赢（15 条）
 
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
@@ -1811,7 +1800,6 @@ nervous、confident、famous 都以 -ous 结尾，意思是充满某种性质。
 | ◆ goal | /ɡəʊl/ | 进球；球门 | 也表示“目标” |
 | ◆ point | /pɔɪnt/ | 分数；点 | 与 joint 押韵 |
 | ◆ beat | /biːt/ | 打败 | 过去式 beat，过去分词 beaten |
-| ◆ draw | /drɔː/ | 平局；画 | 一词三义：画、拉、平局 |
 | ◆ competition | /ˌkɒmpəˈtɪʃn/ | 比赛；竞争 | com-（共同）＋ pet（追求）＋ -ition |
 | ◆ champion | /ˈtʃæmpiən/ | 冠军 | 重音在首 |
 | ◆ medal | /ˈmedl/ | 奖牌 | 与 metal 同音 |
@@ -1819,7 +1807,7 @@ nervous、confident、famous 都以 -ous 结尾，意思是充满某种性质。
 
 ### 14.3 器材与场所
 
-表 14-3　器材与场所（10 条）
+表 14-3　器材与场所（9 条）
 
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
@@ -1827,7 +1815,6 @@ nervous、confident、famous 都以 -ous 结尾，意思是充满某种性质。
 | ◆ bat | /bæt/ | 球拍 | 也指蝙蝠 |
 | ◆ racket | /ˈrækɪt/ | 球拍 | 网球、羽毛球用 |
 | ◆ net | /net/ | 球网 | 与 pet、wet 押韵 |
-| ◆ gym | /dʒɪm/ | 体育馆；健身房 | g 读 /dʒ/ |
 | ◆ stadium | /ˈsteɪdiəm/ | 体育场 | 重音在首。兼 PET |
 | ◆ pool | /puːl/ | 游泳池 | 搭配 swimming pool |
 | ◆ court | /kɔːt/ | 球场 | 网球、篮球用 |
@@ -1838,7 +1825,7 @@ nervous、confident、famous 都以 -ous 结尾，意思是充满某种性质。
 
 ### 14.4 动词与搭配
 
-表 14-4　动词与搭配（12 条）
+表 14-4　动词与搭配（8 条）
 
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
@@ -1848,11 +1835,7 @@ nervous、confident、famous 都以 -ous 结尾，意思是充满某种性质。
 | ○ kite | /kaɪt/ | 风筝 | fly a kite。二年级口语先会说 |
 | ★ exercise | /ˈeksəsaɪz/ | 锻炼；练习 | 搭配 do exercise |
 | ○ do sports | /duː spɔːts/ | 做运动 | do 配 sports，play 配球类 |
-| ◆ practise | /ˈpræktɪs/ | 练习 | 搭配 practise doing |
-| ◆ train | /treɪn/ | 训练 | 也指火车 |
 | ◆ join | /dʒɔɪn/ | 加入 | 搭配 join the team |
-| ◆ fit | /fɪt/ | 健康的；合身 | 搭配 keep fit |
-| ◆ tired | /ˈtaɪəd/ | 累的 | 见第十三章 |
 | ◆ cheer | /tʃɪə(r)/ | 欢呼；加油 | Cheer up 也用于鼓励 |
 
 ### 14.5 三种 play
@@ -1929,11 +1912,11 @@ in、on、at 的大小三级，是小学阶段最重要的介词规律。in 管�
 
 ### 15.2 表示方向与移动
 
-表 15-3　方向介词（12 条）
+表 15-3　方向介词（11 条）
 
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
-| ★ to | /tuː/ | 到…… | go to school。home 前不加 to |
+| ★ to | /tuː/ | 到……；差（几分钟到几点） | go to school，home 前不加 to；分钟数超过 30 时用 |
 | ★ from | /frɒm/ | 从…… | from Monday to Friday |
 | ★ into | /ˈɪntuː/ | 进入 | 从外到内 |
 | ○ out of | /aʊt əv/ | 从……出来 | into 的反义，三个词 |
@@ -1942,7 +1925,6 @@ in、on、at 的大小三级，是小学阶段最重要的介词规律。in 管�
 | ◆ across | /əˈkrɒs/ | 横穿 | 从表面横过 |
 | ◆ through | /θruː/ | 穿过 | 从内部穿过 |
 | ◆ along | /əˈlɒŋ/ | 沿着 | along the river |
-| ◆ past | /pɑːst/ | 经过 | walk past the bank |
 | ◆ off | /ɒf/ | 离开 | get off the bus |
 | ◆ onto | /ˈɒntuː/ | 到……上面 | jump onto the table |
 
@@ -1952,7 +1934,7 @@ across 是横穿表面（across the road），through 是穿过内部（through 
 
 ### 15.3 表示时间
 
-表 15-4　时间介词（10 条）
+表 15-4　时间介词（9 条）
 
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
@@ -1965,7 +1947,6 @@ across 是横穿表面（across the road），through 是穿过内部（through 
 | ◆ during | /ˈdjʊərɪŋ/ | 在……期间 | during the holiday |
 | ◆ until | /ənˈtɪl/ | 直到 | wait until 6 o'clock |
 | ◆ since | /sɪns/ | 自从 | since 2020 |
-| ◆ by | /baɪ/ | 不迟于 | by Friday，含周五 |
 
 时间介词也是三级：in 管年、月、季节、早中晚；on 管具体某天、星期、日期；at 管时刻和固定短语。
 
@@ -1982,7 +1963,7 @@ for 和 since 的区别：for 接时长（for three years），since 接起点�
 | ★ with | /wɪð/ | 和……一起；用 | with my friend；write with a pen |
 | ★ of | /əv/ | ……的 | the name of the school |
 | ★ about | /əˈbaʊt/ | 关于 | a book about animals |
-| ★ by | /baɪ/ | 通过；乘坐 | by bus。by the way 顺便说 |
+| ★ by | /baɪ/ | 通过；乘坐；不迟于 | by bus；by the way 顺便说；by Friday 含周五 |
 | ○ like | /laɪk/ | 像……一样 | He looks like his father |
 | ◆ without | /wɪˈðaʊt/ | 没有 | without water |
 | ◆ because of | /bɪˈkɒz əv/ | 因为 | because of the rain |
@@ -2040,7 +2021,7 @@ a 用在辅音音素开头的单数可数名词前，an 用在元音音素开头
 
 以下搭配没有道理可讲，只能整体记。
 
-表 15-9　常用搭配（16 组）
+表 15-9　常用搭配（28 组）
 
 | 搭配 | 释义 | 搭配 | 释义 |
 |---|---|---|---|
@@ -2440,11 +2421,10 @@ be 动词后的那一条最容易错。学生常说 He usually is late，正确�
 
 一般过去时表示过去某个时间发生的事，或过去一段时间的状态。它的信号词都是“指向过去”的时间。
 
-表 17-5　过去时间词（14 条）
+表 17-5　过去时间词（13 条）
 
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
-| ★ yesterday | /ˈjestədeɪ/ | 昨天 | 最基础的过去时间词 |
 | ★ last night | /lɑːst naɪt/ | 昨晚 | last ＋ 时间，表示“上一个” |
 | ★ last week | /lɑːst wiːk/ | 上周 | 同理还有 last month、last year |
 | ★ last year | /lɑːst jɪə(r)/ | 去年 | 同上 |
@@ -2520,11 +2500,10 @@ ago 的位置要强调：中文说“两天前”，英文说 two days ago，时
 
 一般将来时表示将来要发生的事。它有两种表达，will 和 be going to，小学阶段都要会。
 
-表 17-8　将来时间词（13 条）
+表 17-8　将来时间词（12 条）
 
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
-| ★ tomorrow | /təˈmɒrəʊ/ | 明天 | 最基础的将来时间词 |
 | ★ next week | /nekst wiːk/ | 下周 | next ＋ 时间，不加 the |
 | ★ next month | /nekst mʌnθ/ | 下个月 | 同上 |
 | ★ next year | /nekst jɪə(r)/ | 明年 | 同上 |
@@ -4869,7 +4848,7 @@ KET 的正式名称是 A2 Key。面向中小学生的一套叫 A2 Key for School
 | ◆ biscuit | /ˈbɪskɪt/ | 饼干 | 英式说法。一年级口语课本写 cookie，美式也用 cookie |
 | ◆ cheese | /tʃiːz/ | 奶酪 | 词尾 se 读 /z/ |
 | ◆ butter | /ˈbʌtə(r)/ | 黄油 | 双 t，中间读 /ʌ/ |
-| ◆ coffee | 英 /ˈkɒfi/　美 /ˈkɔːfi/ | 咖啡 | 双 f，不可数 |
+| ◆ coffee | 英 /ˈkɒfi/　美 /ˈkɑːfi/ | 咖啡 | 双 f，不可数 |
 | ◆ snack | /snæk/ | 零食 | 与 snake 只差一字母 |
 | ◆ sugar | /ˈʃʊɡə(r)/ | 糖 | s 读 /ʃ/，是特例 |
 | ◆ salt | /sɔːlt/ | 盐 | o 读 /ɔː/，l 要读出来 |
@@ -4903,7 +4882,6 @@ KET 的正式名称是 A2 Key。面向中小学生的一套叫 A2 Key for School
 | 词条 | 音标 | 释义 | 说明 |
 |---|---|---|---|
 | ◆ thousand | /ˈθaʊznd/ | 千 | 前有具体数字时不加 s |
-| ◆ quarter | /ˈkwɔːtə(r)/ | 四分之一；一刻钟 | qu 读 /kw/ |
 | ◆ double | /ˈdʌbl/ | 两倍；双的 | 搭配 double bed |
 
 ### 38.7 学校与学习
@@ -4961,7 +4939,6 @@ KET 的正式名称是 A2 Key。面向中小学生的一套叫 A2 Key for School
 |---|---|---|---|
 | ◆ second | /ˈsekənd/ | 秒 | 与序数词同形 |
 | ◆ past | /pɑːst/ | 过（几点几分） | 分钟数不超过 30 时用 |
-| ◆ to | /tuː/ | 差（几分钟到几点） | 分钟数超过 30 时用 |
 
 ### 38.11 交通与出行
 
@@ -5027,7 +5004,6 @@ KET 的正式名称是 A2 Key。面向中小学生的一套叫 A2 Key for School
 | ◆ goal | /ɡəʊl/ | 进球；球门 | 也表示“目标” |
 | ◆ point | /pɔɪnt/ | 分数；点 | 与 joint 押韵 |
 | ◆ beat | /biːt/ | 打败 | 过去式 beat，过去分词 beaten |
-| ◆ draw | /drɔː/ | 平局；画 | 一词三义：画、拉、平局 |
 | ◆ competition | /ˌkɒmpəˈtɪʃn/ | 比赛；竞争 | com-（共同）＋ pet（追求）＋ -ition |
 | ◆ champion | /ˈtʃæmpiən/ | 冠军 | 重音在首 |
 | ◆ medal | /ˈmedl/ | 奖牌 | 与 metal 同音 |
@@ -5035,17 +5011,12 @@ KET 的正式名称是 A2 Key。面向中小学生的一套叫 A2 Key for School
 | ◆ bat | /bæt/ | 球拍 | 也指蝙蝠 |
 | ◆ racket | /ˈrækɪt/ | 球拍 | 网球、羽毛球用 |
 | ◆ net | /net/ | 球网 | 与 pet、wet 押韵 |
-| ◆ gym | /dʒɪm/ | 体育馆；健身房 | g 读 /dʒ/ |
 | ◆ stadium | /ˈsteɪdiəm/ | 体育场 | 重音在首 |
 | ◆ pool | /puːl/ | 游泳池 | 搭配 swimming pool |
 | ◆ court | /kɔːt/ | 球场 | 网球、篮球用 |
 | ◆ field | /fiːld/ | 场地 | 足球、田径用 |
 | ◆ track | /træk/ | 跑道 | 与 black 押韵 |
-| ◆ practise | /ˈpræktɪs/ | 练习 | 搭配 practise doing |
-| ◆ train | /treɪn/ | 训练 | 也指火车 |
 | ◆ join | /dʒɔɪn/ | 加入 | 搭配 join the team |
-| ◆ fit | /fɪt/ | 健康的；合身 | 搭配 keep fit |
-| ◆ tired | /ˈtaɪəd/ | 累的 | 见第十三章 |
 | ◆ cheer | /tʃɪə(r)/ | 欢呼；加油 | Cheer up 也用于鼓励 |
 
 ### 38.15 介词与冠词
@@ -5060,13 +5031,11 @@ KET 的正式名称是 A2 Key。面向中小学生的一套叫 A2 Key for School
 | ◆ across | /əˈkrɒs/ | 横穿 | 从表面横过 |
 | ◆ through | /θruː/ | 穿过 | 从内部穿过 |
 | ◆ along | /əˈlɒŋ/ | 沿着 | along the river |
-| ◆ past | /pɑːst/ | 经过 | walk past the bank |
 | ◆ off | /ɒf/ | 离开 | get off the bus |
 | ◆ onto | /ˈɒntuː/ | 到……上面 | jump onto the table |
 | ◆ during | /ˈdjʊərɪŋ/ | 在……期间 | during the holiday |
 | ◆ until | /ənˈtɪl/ | 直到 | wait until 6 o'clock |
 | ◆ since | /sɪns/ | 自从 | since 2020 |
-| ◆ by | /baɪ/ | 不迟于 | by Friday，含周五 |
 | ◆ without | /wɪˈðaʊt/ | 没有 | without water |
 | ◆ because of | /bɪˈkɒz əv/ | 因为 | because of the rain |
 | ◆ instead of | /ɪnˈsted əv/ | 代替 | instead of coffee |
@@ -5131,7 +5100,7 @@ PET 级的短语动词和固定搭配收在第四十一章 41.12 和 41.13。这
 | ◆ go on | 继续 | go on reading |
 | ◆ come on | 加油；快点 | 口语催促 |
 
-表 38-2　KET 高频动词搭配（16 组）
+表 38-2　KET 高频动词搭配（32 组）
 
 | 搭配 | 释义 | 搭配 | 释义 |
 |---|---|---|---|

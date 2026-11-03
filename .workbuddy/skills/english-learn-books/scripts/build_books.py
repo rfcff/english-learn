@@ -9,11 +9,19 @@ import sys
 import tempfile
 from pathlib import Path
 
+import booklib
+
 sys.path.insert(0, "/tmp/pylibs")
 
 import markdown
 
-ROOT = Path(__file__).resolve().parents[4]  # <repo>/.workbuddy/skills/english-learn-books/scripts
+ROOT = booklib.ROOT
+
+BOOKS, cn_to_int, norm, slug, strip_tags = (
+    booklib.BOOKS, booklib.cn_to_int, booklib.norm, booklib.slug,
+    booklib.strip_tags)
+head_text = booklib.head_text
+header_period = booklib.header_period
 
 
 def find_chrome():
@@ -67,8 +75,6 @@ OUT = Path(tempfile.gettempdir()) / "english-learn-pdf"
 OUT.mkdir(exist_ok=True)
 CHROME = find_chrome()
 IMG = ROOT.as_uri() + "/images/"
-
-CN_DIGIT = {ch: i for i, ch in enumerate("零一二三四五六七八九")}
 
 # GB/T 18358-2009: 订口 13mm、切口 10mm、天头 15mm、地脚 17mm；
 # 版心 152×228mm → 成品 175×260mm。
@@ -392,38 +398,6 @@ figcaption {
 """
 
 
-def strip_tags(fragment):
-    text = re.sub(r"<[^>]+>", "", fragment)
-    return html_lib.unescape(text).strip()
-
-
-def norm(text):
-    return re.sub(r"\s+", " ", text).strip()
-
-
-def cn_to_int(token):
-    if not token:
-        return 0
-    if token == "十":
-        return 10
-    if token.startswith("十"):
-        return 10 + cn_to_int(token[1:])
-    if "百" in token:
-        left, right = token.split("百", 1)
-        base = (cn_to_int(left) or 1) * 100
-        if not right:
-            return base
-        if right.startswith("零"):
-            return base + cn_to_int(right[1:])
-        return base + cn_to_int(right)
-    if "十" in token:
-        left, right = token.split("十", 1)
-        return (cn_to_int(left) or 1) * 10 + cn_to_int(right)
-    if token in CN_DIGIT:
-        return CN_DIGIT[token]
-    return None
-
-
 def chapter_number(title):
     matched = re.match(r"第([零一二三四五六七八九十百]+)章", title)
     if not matched:
@@ -692,21 +666,13 @@ def add_heading_ids(html):
     heading makes them resolve; PyMuPDF then carries them over as PDF links.
     """
 
-    def slug(text):
-        out = strip_tags(text).strip().lower()
-        out = re.sub(r"[`*_~\[\]()]", "", out)
-        out = re.sub(r"[^\w\u4e00-\u9fff\s-]", "", out)
-        out = out.replace(" ", "-")
-        out = re.sub(r"-+", "-", out)
-        return out.strip("-")
-
     seen = {}
 
     def repl(match):
         tag, attrs, inner = match.group(1), match.group(2), match.group(3)
         if 'id="' in attrs:
             return match.group(0)
-        base = slug(inner) or "section"
+        base = slug(strip_tags(inner)) or "section"
         # Duplicate slugs get a numeric suffix, matching GitHub's behaviour.
         if base in seen:
             seen[base] += 1
@@ -809,6 +775,58 @@ def longest_tokens(cell_html):
     return widths
 
 
+def _balance_columns(rows, columns, avail_em, pad):
+    """Core three-stage width algorithm for one column block.
+
+    Each column first claims the width of its longest unbreakable token
+    (the floor), then the leftover page width is shared in proportion to
+    how much text the column actually carries (the soft demand).
+    """
+    demand = [0.0] * columns
+    floor = [0.0] * columns
+    for row in rows:
+        for index, cell in enumerate(row):
+            if index >= columns:
+                continue
+            text = strip_tags(cell)
+            demand[index] = max(demand[index], measure_text(text))
+            for token in longest_tokens(cell):
+                floor[index] = max(floor[index], token)
+
+    floors = [min(f, 10.0) + pad for f in floor]
+    total_floor = sum(floors)
+    if total_floor >= avail_em:
+        # Not enough room even after capping long columns. Keep every
+        # short column intact (its tokens must not wrap) and squeeze only
+        # the capped long-text columns, which can break mid-run in CJK.
+        short = [i for i in range(columns) if floor[i] <= 10.0]
+        long = [i for i in range(columns) if floor[i] > 10.0]
+        reserved = sum(floors[i] for i in short)
+        if reserved >= avail_em:
+            # Even the short columns alone overflow; fall back to an even
+            # proportional split and accept wrapping everywhere.
+            scale = avail_em / total_floor
+            widths = [f * scale for f in floors]
+        else:
+            widths = [0.0] * columns
+            for i in short:
+                widths[i] = floors[i]
+            leftover = avail_em - reserved
+            total_long = sum(floors[i] for i in long) or 1.0
+            for i in long:
+                widths[i] = leftover * floors[i] / total_long
+    else:
+        soft = [min(d + pad, 16.0) for d in demand]
+        extra_need = [max(0.0, soft[i] - floors[i]) for i in range(columns)]
+        spare = avail_em - total_floor
+        total_extra = sum(extra_need)
+        widths = list(floors)
+        if total_extra > 0:
+            for i in range(columns):
+                widths[i] += spare * extra_need[i] / total_extra
+    return widths
+
+
 def set_column_widths(html, avail_em=43.0):
     """Give every table explicit column widths based on its own content.
 
@@ -820,85 +838,99 @@ def set_column_widths(html, avail_em=43.0):
     then the leftover page width is shared in proportion to how much text the
     column actually carries.
 
+    Tables whose header is one short pattern tiled k times (``单词|音标|意思``
+    ×2, ``现在|过去`` ×3, …) are several lists side by side. Handing the whole
+    row to the shared algorithm lets one wide cell inflate its group while the
+    others starve, so the row is first split into k equal groups, each balanced
+    independently inside its own budget. Sibling tables that share the same
+    pattern *and group count* additionally merge their rows before balancing:
+    they then render one common grid, so e.g. 手脚 lines up with 头部 on the
+    same page instead of inventing its own column ratios from four short rows.
+
     ``avail_em`` is the table's real rendered width in em. Cover tables are
     narrower than the text block (88%), so they must be measured against a
     smaller budget or their narrow columns get squeezed into wrapping.
     """
     pad = 1.2        # horizontal cell padding, in em
 
-    def repl(match):
-        table = match.group(0)
-        tag_match = re.match(r"<table\b[^>]*>", table)
-        if not tag_match:
-            return table
-        rows = re.findall(r"<tr\b.*?</tr>", table, flags=re.S)
-        if not rows:
-            return table
+    def normalize(ws, budget):
+        # _balance_columns returns floors only when no column asks for
+        # more than its floor, leaving the block narrower than its budget.
+        # Rescale so every block fills its share; ratios inside the block
+        # are unchanged, so single-group tables render exactly as before.
+        total = sum(ws)
+        return [w * budget / total for w in ws] if total else ws
 
+    def widths_for(rows, columns, u):
+        if u is None:
+            return normalize(_balance_columns(rows, columns, avail_em, pad),
+                             avail_em)
+        k = columns // u
+        group = avail_em / float(k)
+        widths = []
+        for g in range(k):
+            block = [r[g * u:(g + 1) * u] for r in rows]
+            widths += normalize(_balance_columns(block, u, group, pad), group)
+        return widths
+
+    # Pass 1: parse every table and group repeating-header siblings.
+    matches = list(re.finditer(r"<table\b.*?</table>", html, flags=re.S))
+    infos = []
+    for m in matches:
         raw_rows = []
-        for row in rows:
+        for row in re.findall(r"<tr\b.*?</tr>", m.group(0), flags=re.S):
             cells = re.findall(r"<t[dh][^>]*>(.*?)</t[dh]>", row, flags=re.S)
             if cells:
                 raw_rows.append(cells)
-        columns = max(len(row) for row in raw_rows)
-        if columns < 2:
-            return table
+        columns = max((len(r) for r in raw_rows), default=0)
+        if not raw_rows or columns < 2:
+            infos.append(None)
+            continue
+        plain = [head_text(c) for c in raw_rows[0]]
+        u = header_period(plain)
+        key = None
+        if u:
+            key = (tuple(plain[:u]), columns)
+        infos.append({'rows': raw_rows, 'columns': columns, 'u': u, 'key': key})
 
-        demand = [0.0] * columns
-        floor = [0.0] * columns
-        for row in raw_rows:
-            for index, cell in enumerate(row):
-                if index >= columns:
-                    continue
-                text = strip_tags(cell)
-                demand[index] = max(demand[index], measure_text(text))
-                for token in longest_tokens(cell):
-                    floor[index] = max(floor[index], token)
+    merged = {}
+    for i, info in enumerate(infos):
+        if info and info['key']:
+            merged.setdefault(info['key'], []).append(i)
 
-        floors = [min(f, 10.0) + pad for f in floor]
-        total_floor = sum(floors)
-        if total_floor >= avail_em:
-            # Not enough room even after capping long columns. Keep every
-            # short column intact (its tokens must not wrap) and squeeze only
-            # the capped long-text columns, which can break mid-run in CJK.
-            short = [i for i in range(columns) if floor[i] <= 10.0]
-            long = [i for i in range(columns) if floor[i] > 10.0]
-            reserved = sum(floors[i] for i in short)
-            if reserved >= avail_em:
-                # Even the short columns alone overflow; fall back to an even
-                # proportional split and accept wrapping everywhere.
-                scale = avail_em / total_floor
-                widths = [f * scale for f in floors]
-            else:
-                widths = [0.0] * columns
-                for i in short:
-                    widths[i] = floors[i]
-                leftover = avail_em - reserved
-                total_long = sum(floors[i] for i in long) or 1.0
-                for i in long:
-                    widths[i] = leftover * floors[i] / total_long
+    # Pass 2: one width plan per table; shared patterns use merged rows.
+    plans = {}
+    for i, info in enumerate(infos):
+        if not info:
+            continue
+        if info['key'] and len(merged[info['key']]) > 1:
+            rows = [r for j in merged[info['key']] for r in infos[j]['rows']]
+            plans[i] = widths_for(rows, info['columns'], info['u'])
         else:
-            soft = [min(d + pad, 16.0) for d in demand]
-            extra_need = [max(0.0, soft[i] - floors[i]) for i in range(columns)]
-            spare = avail_em - total_floor
-            total_extra = sum(extra_need)
-            widths = list(floors)
-            if total_extra > 0:
-                for i in range(columns):
-                    widths[i] += spare * extra_need[i] / total_extra
+            plans[i] = widths_for(info['rows'], info['columns'], info['u'])
 
-        share = [100.0 * w / avail_em for w in widths]
-
-        colgroup = "<colgroup>" + "".join(
-            f'<col style="width:{s:.2f}%">' for s in share
-        ) + "</colgroup>"
-
-        tag = tag_match.group(0)
-        if "table-layout" not in tag:
-            tag = tag[:-1] + ' style="table-layout:fixed">'
-        return tag + colgroup + table[tag_match.end():]
-
-    return re.sub(r"<table\b.*?</table>", repl, html, flags=re.S)
+    # Pass 3: splice colgroups back in document order.
+    out = []
+    pos = 0
+    for i, m in enumerate(matches):
+        out.append(html[pos:m.start()])
+        table = m.group(0)
+        tag_match = re.match(r"<table\b[^>]*>", table)
+        widths = plans.get(i)
+        if widths is None or not tag_match:
+            out.append(table)
+        else:
+            share = [100.0 * w / avail_em for w in widths]
+            colgroup = "<colgroup>" + "".join(
+                f'<col style="width:{s:.2f}%">' for s in share
+            ) + "</colgroup>"
+            tag = tag_match.group(0)
+            if "table-layout" not in tag:
+                tag = tag[:-1] + ' style="table-layout:fixed">'
+            out.append(tag + colgroup + table[tag_match.end():])
+        pos = m.end()
+    out.append(html[pos:])
+    return ''.join(out)
 
 
 def build_html(md_path, book_title):
@@ -1075,36 +1107,8 @@ def write_book(md_path, book_title, html_name, pdf_path):
 
 
 def main():
-    write_book(
-        ROOT / "小学英语辅导手册-学生本.md",
-        "小学英语辅导手册 · 学生本",
-        "slim-book.html",
-        ROOT / "小学英语辅导手册-学生本.pdf",
-    )
-    write_book(
-        ROOT / "小学英语辅导手册.md",
-        "小学英语辅导手册",
-        "full-book.html",
-        ROOT / "小学英语辅导手册.pdf",
-    )
-    write_book(
-        ROOT / "初中英语学习辅导手册.md",
-        "初中英语学习辅导手册",
-        "junior-book.html",
-        ROOT / "初中英语学习辅导手册.pdf",
-    )
-    write_book(
-        ROOT / "自然拼读.md",
-        "自然拼读",
-        "phonics-book.html",
-        ROOT / "自然拼读.pdf",
-    )
-    write_book(
-        ROOT / "小学英语-KET-PET辅导手册.md",
-        "小学英语 · KET · PET 辅导手册",
-        "ket-pet-book.html",
-        ROOT / "小学英语-KET-PET辅导手册.pdf",
-    )
+    for md_name, title, html_name, pdf_name in BOOKS:
+        write_book(ROOT / md_name, title, html_name, ROOT / pdf_name)
 
 
 if __name__ == "__main__":

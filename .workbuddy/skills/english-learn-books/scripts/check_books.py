@@ -26,19 +26,8 @@ import re
 import sys
 from pathlib import Path
 
-# <repo>/.workbuddy/skills/english-learn-books/scripts/check_books.py
-ROOT = Path(__file__).resolve().parents[4]
-
-CN = [''] + [
-    '一', '二', '三', '四', '五', '六', '七', '八', '九', '十',
-    '十一', '十二', '十三', '十四', '十五', '十六', '十七', '十八', '十九', '二十',
-    '二十一', '二十二', '二十三', '二十四', '二十五', '二十六', '二十七', '二十八',
-    '二十九', '三十', '三十一', '三十二', '三十三', '三十四', '三十五', '三十六',
-    '三十七', '三十八', '三十九', '四十', '四十一', '四十二', '四十三', '四十四',
-    '四十五', '四十六', '四十七', '四十八', '四十九', '五十',
-    '五十一', '五十二', '五十三', '五十四', '五十五', '五十六', '五十七', '五十八',
-    '五十九', '六十',
-]
+import booklib
+from booklib import ROOT, slug, cn_to_n
 
 # Books that carry 部分/章 structure, and the offsets that tie them together.
 # Key = child book, value = (master book, [(child_lo, child_hi, offset), ...]).
@@ -60,23 +49,7 @@ TITLE_DIFF_OK = {
     (17, '时态', '三大时态'),
 }
 
-BOOKS = [
-    '小学英语辅导手册.md',
-    '小学英语-KET-PET辅导手册.md',
-    '小学英语辅导手册-学生本.md',
-    '自然拼读.md',
-    '初中英语学习辅导手册.md',
-]
-
-
-def slug(text):
-    """Reproduce build_books.add_heading_ids slug rules exactly."""
-    out = text.strip().lower()
-    out = re.sub(r'[`*_~\[\]()]', '', out)
-    out = re.sub(r'[^\w\u4e00-\u9fff\s-]', '', out)
-    out = out.replace(' ', '-')
-    out = re.sub(r'-+', '-', out)
-    return out.strip('-')
+BOOKS = booklib.BOOK_NAMES
 
 
 def is_sep(line):
@@ -85,10 +58,6 @@ def is_sep(line):
         return False
     body = line.replace('|', '').replace('-', '').replace(':', '').replace(' ', '')
     return body == ''
-
-
-def cn_to_n(text):
-    return CN.index(text) if text in CN else -1
 
 
 class Report:

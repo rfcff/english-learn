@@ -22,26 +22,11 @@ import re
 import sys
 from pathlib import Path
 
-# <repo>/.workbuddy/skills/english-learn-books/scripts/rebuild_toc.py
-ROOT = Path(__file__).resolve().parents[4]
+import booklib
+from booklib import ROOT, slug
 
-STRUCTURED = [
-    '小学英语辅导手册.md',
-    '小学英语-KET-PET辅导手册.md',
-    '初中英语学习辅导手册.md',
-    '自然拼读.md',
-]
-LITE = ['小学英语辅导手册-学生本.md']
-
-
-def slug(text):
-    """Must stay identical to build_books.add_heading_ids, or links break."""
-    out = text.strip().lower()
-    out = re.sub(r'[`*_~\[\]()]', '', out)
-    out = re.sub(r'[^\w\u4e00-\u9fff\s-]', '', out)
-    out = out.replace(' ', '-')
-    out = re.sub(r'-+', '-', out)
-    return out.strip('-')
+STRUCTURED = booklib.STRUCTURED
+LITE = booklib.LITE
 
 
 def collect_structured(lines):
@@ -161,9 +146,7 @@ def main(argv):
 
     print('重建目录%s' % ('（试运行）' if dry else ''))
     for path, lite in targets:
-        p = Path(path)
-        if not p.is_absolute():
-            p = ROOT / p
+        p = booklib.resolve(path)
         if not p.exists():
             print('  跳过（不存在）:', p.name)
             continue

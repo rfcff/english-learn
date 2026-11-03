@@ -16,7 +16,7 @@
 - **目录、注释、练习等用字**可适当减小，但**义务教育小学阶段最小用字不得小于 10.5P（5 号）**，初中与高中不得小于 9P。
 - **行数与字数**：外语等学科教科书版心规格应符合表 1，但**不受每面行数、每行字数限制**。
 
-### 本项目实测参数（`build_books.py` L73–128）
+### 本项目实测参数（`build_books.py` L79–134）
 
 | 项目 | 取值 | 与国标的关系 |
 |---|---|---|
@@ -30,11 +30,11 @@
 | 正文行高 | 1.75 | 外语学科不受行数限制，取宽行距便于阅读 |
 | 页码 | 9pt、`#1a4f82`、页脚居中 | 低于 10.5pt 下限，属页码非正文用字，惯例允许 |
 
-**改字号时的硬约束**：小学阶段正文与表内文字不得低于 10.5pt。当前表体是 10pt（L331），严格说已低于小学下限——这是既定取舍（表格信息密度优先），若日后要完全合规需把表体提到 10.5pt 并重新核算列宽预算。
+**改字号时的硬约束**：小学阶段正文与表内文字不得低于 10.5pt。当前表体是 10pt（L337），严格说已低于小学下限——这是既定取舍（表格信息密度优先），若日后要完全合规需把表体提到 10.5pt 并重新核算列宽预算。
 
 ### 其他版式依据
 
-- **三线表**（L323 注释）：顶线、栏目线、底线，无竖线、无行间横线。依据课本惯例与 CY/T 170。
+- **三线表**（L329 注释）：顶线、栏目线、底线，无竖线、无行间横线。依据课本惯例与 CY/T 170。
 - **PEP 版式参照**：人教版 PEP 语文与英语教科书的版式风格（章标题色带、节标题左侧竖线、三线表、首行缩进两字）作为观感基准。**注意 PEP 只是版式参照，内容与词表一律以教科版（广州版）为准**——广州小学不用 PEP 教材。
 
 ---
@@ -43,17 +43,17 @@
 
 | 元素 | 字号 | 颜色 | 字体族 | 位置（行号） |
 |---|---|---|---|---|
-| 正文 | 10.5pt / 行高 1.75 | `#1c1916` | Songti SC → STSong → Times New Roman | L132–139 |
-| 段落 | 首行缩进 2em，两端对齐 | — | `text-justify: inter-ideograph`、`line-break: strict` | L147–153 |
-| 封面 h1 | 26pt，字距 0.12em | `#1a4f82` | 黑体族 | L170–179 |
-| 部分 h1 | 22pt，字距 0.2em，`::after` 22mm 横线 | `#1a4f82` | 黑体族 | L202–217 |
-| 章 h2 | **16pt**，白字 + 蓝底 `#1f6fb2` 色带 | `#fff` | 黑体族 | L219–226 |
-| 节 h3 | **12pt**，左边框 3.2pt `#1f6fb2` | **`#1a4f82`** | 黑体族 | L227–234 |
-| 习题 p.exercise | **12pt**（与 h3 相同），左边框 3.2pt `#e07b2a` | **`#c45c12` 橙** | 黑体族 | L235–249 |
-| 表题 p.tablecap | 10.5pt，居中，无缩进 | `#1a4f82` | 同正文 | L311–321 |
-| 表体 | 10pt / 行高 1.45 | — | 同正文 | L331–332 |
-| 目录内 h3 | 11pt，去左边框 | `#1a4f82` | — | L260–269 |
-| 音标 span.ipa | 继承 | `#4e5964`，nowrap | Times New Roman | L360 |
+| 正文 | 10.5pt / 行高 1.75 | `#1c1916` | Songti SC → STSong → Times New Roman | L138–145 |
+| 段落 | 首行缩进 2em，两端对齐 | — | `text-justify: inter-ideograph`、`line-break: strict` | L153–159 |
+| 封面 h1 | 26pt，字距 0.12em | `#1a4f82` | 黑体族 | L176–185 |
+| 部分 h1 | 22pt，字距 0.2em，`::after` 22mm 横线 | `#1a4f82` | 黑体族 | L208–223 |
+| 章 h2 | **16pt**，白字 + 蓝底 `#1f6fb2` 色带 | `#fff` | 黑体族 | L225–232 |
+| 节 h3 | **12pt**，左边框 3.2pt `#1f6fb2` | **`#1a4f82`** | 黑体族 | L233–240 |
+| 习题 p.exercise | **12pt**（与 h3 相同），左边框 3.2pt `#e07b2a` | **`#c45c12` 橙** | 黑体族 | L241–255 |
+| 表题 p.tablecap | 10.5pt，居中，无缩进 | `#1a4f82` | 同正文 | L317–327 |
+| 表体 | 10pt / 行高 1.45 | — | 同正文 | L337–338 |
+| 目录内 h3 | 11pt，去左边框 | `#1a4f82` | — | L266–275 |
+| 音标 span.ipa | 继承 | `#4e5964`，nowrap | Times New Roman | L366 |
 
 **⚠️ 关键约束：h3 与 p.exercise 字号完全相同（都是 12pt，边距行高也刻意对齐）**，唯一区别是颜色。书签采集靠 `ORANGE = 0xC45C12` 排除习题段。若日后改动这两者的字号或颜色，必须同步改 `collect_headings()`，否则「习题」会混进书签和目录页码表。
 
@@ -65,24 +65,29 @@
 
 三段式算法：
 
-1. **`measure_text()`（L738–763）** 按 em 估算宽度。权重：CJK 全角 = 1.0、IPA 音标区 = 0.55、窄字符 `ijlI.,;:!|'` 与空格 = 0.28、`mwMW` = 0.85、其他大写 = 0.68、其余拉丁 = 0.52、NBSP = 0.3。原则是**宁可略微高估，也不要低估**。
-2. **`longest_tokens()`（L774–809）** 求单元格内真正不可断片段的宽度。`span.ipa` 整条视为原子（CSS nowrap）；英文词与数字不可断；**中文任意字间可断，只保留 2.0em 余量**（避免行尾出现孤立单字）。
+1. **`measure_text()`（L704–729）** 按 em 估算宽度。权重：CJK 全角 = 1.0、IPA 音标区 = 0.55、窄字符 `ijlI.,;:!|'` 与空格 = 0.28、`mwMW` = 0.85、其他大写 = 0.68、其余拉丁 = 0.52、NBSP = 0.3。原则是**宁可略微高估，也不要低估**。
+2. **`longest_tokens()`（L740–775）** 求单元格内真正不可断片段的宽度。`span.ipa` 整条视为原子（CSS nowrap）；英文词与数字不可断；**中文任意字间可断，只保留 2.0em 余量**（避免行尾出现孤立单字）。
    - 历史 bug：曾把整段中文当不可断片段（算出 16em），导致真正有富余的窄列被「饿死」。
-3. **`set_column_widths()`（L812–901）** 分配。预算 `avail_em = 43.0`（版心宽换算的 em 数）。
+3. **`set_column_widths()`（L830–933）** 分配。预算 `avail_em = 43.0`（版心宽换算的 em 数）。核心算法拆在 **`_balance_columns()`（L778–827）**，两张表共用。本函数分三趟：Pass 1 解析全部表并按表头模式分组（L876–899）、Pass 2 逐表出宽度方案（L901–910）、Pass 3 把 colgroup 拼回原文（L912–933）。
    - 每列 `floor` = 最长不可断片段 + padding 1.2em（单列下限封顶 10em）；`demand` = 最长单元格全文宽（软上限 16em）。
-   - **正常分支**（L880–888）：先付 floor，剩余宽度按各列 `extra_need` 比例分配。
-   - **溢出分支**（L860–879）：总 floor 超预算时，短列（≤10em，不可断 token 密集）保完整，只压缩被封顶的长列（CJK 可中途断）；若短列本身也溢出，退化为整体等比缩放。
+   - **正常分支**（L819–827）：先付 floor，剩余宽度按各列 `extra_need` 比例分配。
+   - **溢出分支**（L798–817）：总 floor 超预算时，短列（≤10em，不可断 token 密集）保完整，只压缩被封顶的长列（CJK 可中途断）；若短列本身也溢出，退化为整体等比缩放。
+   - **重复组均分（repeating groups，`booklib.header_period()` L112–125、调用点 build_books L889–893、`widths_for()` L864–874）**：表头由一个最短模式重复 k 次构成（k ≥ 2，首列非空）时，行宽先按 k 等分，各组在**自己的组预算内**独立跑 `_balance_columns`，再各自归一化到 1/k。命中例：`单词|音标|意思`×2（学生本 20 张双词表）、`现在|过去`×3（学生本过去式表）、`单词|音标`×3（学生本月份表）、`数字|单词|音标`×3、`搭配|释义`×2、`词族|例词`×2、`连缀|例词`×2、`原形→过去式`×3。判定用表头文本找最短重复周期，不用列数硬编码；表头不重复的表（如 `词条|音标|释义|说明`）走单组路径不受影响。历史动因：整行共享预算时一个宽 cell（如 `牙齿（多颗）`、`was / were`）会撑爆所在组、别组饿死。
+   - **同模式表共享网格（`merged`，L896–899 分组、L902–910 消费）**：同一本书里表头模式与列数都相同的重复组表，先把所有表的行合并成一个样本池再算宽度，于是各表得到完全一致的 colgroup。这样同页相邻表（如学生本「头部」与「手脚」）列线上下对齐，短表也不会凭四行内容自造一套比例（曾出现手脚表「意思」列 32%、头部表同列 28% 的错位）。合并只影响比例，不影响均分与硬约束：floor 仍按全池最长 token 计算，`check_layout.py` 复验各组仍精确 1/k。
+   - **归一化（`normalize`，L856–862）**：`_balance_columns` 在所有列都不超 floor 时只返回 floors（总和 < 预算），浏览器会把缺口按比例摊还、破坏均分，故每块结果强制缩放到其预算。单组表缩放不改变比例，渲染与旧版一致。
    - 输出注入 `<colgroup><col style="width:N%">` 并给 table 补 `table-layout:fixed`。
 
-**⚠️ 封面表必须单独传预算**：`.cover table` 宽 88%，列宽预算要传 `43.0 * 0.88`（L946–947），否则窄列被挤折行。
+**⚠️ 封面表必须单独传预算**：`.cover table` 宽 88%，列宽预算要传 `43.0 * 0.88`（L979），否则窄列被挤折行。
+
+**改列宽算法后跑 `scripts/check_layout.py`**：它只走 HTML 阶段（不启动 Chrome、不出 PDF，几秒完成），逐表验证 colgroup 求和 100%、重复组表各组精确 1/k。这类问题 `check_books.py` 查不到（结构完好、只是渲染失衡），过去只能靠渲染 PDF 截图肉眼看。
 
 其他表格规则：
 
 - `thead { display: table-header-group }` 表头跨页重复；`tr { break-inside: avoid }` 行不拆断。
-- `mark_wide_tables()`（L446–455）：首行 ≥6 列加 `class="wide"`，行高降 1.35、padding 减至 2.6pt 3.2pt。
-- `mark_vocab_tables()`（L458–475）：表头前四列恰为 `词条/音标/释义/说明` 时加 `class="vocab"`，首列 Arial 700、`#1a4f82`、nowrap。可与 wide 叠加。
-- `protect_cell_text()`（L478–491）：`★○◆●` 标记后用 NBSP 黏住词形；`/xxx/` 音标包 `span.ipa` 防拆行。
-- **表号 `表 N-M` 是 md 里手写的，脚本只识别不重编号**；图号则相反，由 `decorate()`（L505–523）按当前章号自动生成 `N-M` 前缀。
+- `mark_wide_tables()`（L420–429）：首行 ≥6 列加 `class="wide"`，行高降 1.35、padding 减至 2.6pt 3.2pt。
+- `mark_vocab_tables()`（L432–449）：表头前四列恰为 `词条/音标/释义/说明` 时加 `class="vocab"`，首列 Arial 700、`#1a4f82`、nowrap。可与 wide 叠加。
+- `protect_cell_text()`（L452–465）：`★○◆●` 标记后用 NBSP 黏住词形；`/xxx/` 音标包 `span.ipa` 防拆行。
+- **表号 `表 N-M` 是 md 里手写的，脚本只识别不重编号**；图号则相反，由 `decorate()`（L479–497）按当前章号自动生成 `N-M` 前缀。
 
 ---
 
@@ -90,7 +95,7 @@
 
 ### 目录来源
 
-目录就是 md 里的一节 `## 目录`，内容是手写的 Markdown 链接列表。`build_html()`（L962–964）识别章标题为「目录」时，对该节调用 `toc_links()` 并挂 `class="chapter toc"`。
+目录就是 md 里的一节 `## 目录`，内容是手写的 Markdown 链接列表。`build_html()`（L994–996）识别章标题为「目录」时，对该节调用 `toc_links()` 并挂 `class="chapter toc"`。
 
 **目录必须写成三级**（部分 → 章 → 缩进小节），且不收录卷首：
 
@@ -103,19 +108,19 @@
   - [1.1 二十六个字母的常见读音](#11-二十六个字母的常见读音)
 ```
 
-`toc_links()`（L535–547）把每个链接改写为 flex 三件套：`toc-name` + `toc-leader`（点线引导）+ `toc-page data-toc="键">000`。键 = 条目纯文本归一化后 HTML 转义。
+`toc_links()`（L509–521）把每个链接改写为 flex 三件套：`toc-name` + `toc-leader`（点线引导）+ `toc-page data-toc="键">000`。键 = 条目纯文本归一化后 HTML 转义。
 
 ### 页码回填需要两到三次渲染
 
 1. 渲染草稿 `full-pass1.pdf` → `heading_pages()` 取真实页码 → `fill_toc()` 回填 → 重写 HTML → 渲染正式 PDF。页码只有排版后才可知，所以必须两遍。
-2. **漂移校验**（L1059–1072）：`toc_numbers()` 从成品 PDF 解析目录印出的页码，与实测比对；若填入页码后回流改变了分页（`shown != page`），重新 fill_toc 并**第三次渲染**，打印 `TOC shifted, reprinted`。
+2. **漂移校验**（L1091–1104）：`toc_numbers()` 从成品 PDF 解析目录印出的页码，与实测比对；若填入页码后回流改变了分页（`shown != page`），重新 fill_toc 并**第三次渲染**，打印 `TOC shifted, reprinted`。
 3. 无目录的书（HTML 里没有 `data-toc="`）只渲染一次。
 
 ### 目录 CSS
 
 `section.toc { column-count: 2; column-gap: 8mm; column-rule: 0.5pt solid #dfe8f0 }`；目录内 h2/h3 `break-after: avoid`，每个 `ul` 整体不跨栏；引导线 0.6pt dotted `#8eb4d4`；页码固定 2.2em 右对齐、`font-variant-numeric: tabular-nums` 等宽数字。
 
-### 书签采集 `collect_headings()`（L550–626）
+### 书签采集 `collect_headings()`（L524–600）
 
 目录页码回填与书签**共用同一个采集器**，四条过滤规则：
 
@@ -126,7 +131,7 @@
 
 折行合并：按 y 排序后，垂直距离 <30 且字号差 <2 的相邻线拼为一条标题。
 
-### 书签层级 `add_outline()`（L988–1021）
+### 书签层级 `add_outline()`（L1020–1053）
 
 **按标题模式优先、字号兜底**：
 
@@ -149,7 +154,7 @@
 
 ---
 
-## 五、标题锚点 `add_heading_ids()`（L685–721）
+## 五、标题锚点 `add_heading_ids()`（L659–687）
 
 目录用 GitHub 风格锚点（`#第一章-人体部位`），但无头 Chrome 打印时标题不带 `id`，导致**目录条目全部指向空、成品 PDF 无可点击链接**。脚本给 h1–h4 补 slug：
 
@@ -161,9 +166,9 @@
 
 ---
 
-## 六、中英文混排 `tighten_latin()`（L724–735）
+## 六、中英文混排 `tighten_latin()`（L690–701）
 
-对每个 `<h1>`（封面书名与部分标题）内部的拉丁单词包 `<span class="latin">`，配 `.latin { letter-spacing: 0 }`（L180）。
+对每个 `<h1>`（封面书名与部分标题）内部的拉丁单词包 `<span class="latin">`，配 `.latin { letter-spacing: 0 }`（L186）。
 
 原因：h1 级标题有大字距（封面 0.12em、部分 0.2em、`.cover .meta` 0.32em），`letter-spacing` 逐字符施加会把 KET、PET 拆成「K E T」。归零拉丁词字距后，英文缩写保持紧凑，中文仍享受疏朗字距。
 
@@ -187,7 +192,7 @@ md → markdown.markdown(extensions=["tables", "sane_lists"])
    → add_outline()
 ```
 
-依赖：`markdown`、`PyMuPDF`（函数内延迟 `import fitz`）、系统 Chrome 或 Edge（`find_chrome()` L19–43 在 Windows 试 5 个候选路径）。**无 requirements.txt**，环境里已装好。Python 解释器用 `C:\Users\gaoshiqiang\.workbuddy\binaries\python\envs\default\Scripts\python.exe`。
+依赖：`markdown`、`PyMuPDF`（函数内延迟 `import fitz`）、系统 Chrome 或 Edge（`find_chrome()` L27–51 在 Windows 试 5 个候选路径）。**无 requirements.txt**，环境里已装好。Python 解释器用 `C:\Users\gaoshiqiang\.workbuddy\binaries\python\envs\default\Scripts\python.exe`。
 
 构建命令（脚本用 `parents[4]` 定位仓库根，从任何工作目录调用都行）：
 
@@ -218,7 +223,7 @@ for t in d.get_toc():
 print(d.page_count, len(d.get_toc()), lv, sum(len(p.get_links()) for p in d))
 ```
 
-`main()`（L1077–1107）五本书配置：
+`main()`（L1109–1115）五本书配置：
 
 | md | 封面标题 | 临时 HTML |
 |---|---|---|

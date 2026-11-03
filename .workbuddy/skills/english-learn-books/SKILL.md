@@ -50,7 +50,7 @@ agent_created: true
 - 记词方法（KET 册 18–30 = 主册 26–38）正文逐字相同，只因 KET 册无拼读部分而替换几处指向拼读的表述，替换表在 book-map.md B 节
 - 学生本的主题重组对应表
 - 主册独有、不下发的内容
-- 十一条历次重排踩过的坑
+- 十四条历次重排踩过的坑
 
 同步时不可妥协的四条：
 
@@ -80,7 +80,7 @@ python .workbuddy/skills/english-learn-books/scripts/rebuild_toc.py             
 python .workbuddy/skills/english-learn-books/scripts/rebuild_toc.py 自然拼读.md  # 单本
 ```
 
-它生成三级目录（部分 → 章 → 缩进小节），按现行约定不收卷首，并且**幂等**——对未改动的书重跑，写回的字节完全相同。它的 `slug()` 必须与 `build_books.py` 里的 `add_heading_ids()` 逐字符一致，否则链接全断；两处要一起改。
+它生成三级目录（部分 → 章 → 缩进小节），按现行约定不收卷首，并且**幂等**——对未改动的书重跑，写回的字节完全相同。锚点 `slug()` 的唯一实现在 `booklib.py`，rebuild_toc、build_books 的 `add_heading_ids`、check_books 三方都从它导入，不存在"两处要一起改"的问题。
 
 ### 5. 校验
 
@@ -100,7 +100,9 @@ python .workbuddy/skills/english-learn-books/scripts/check_books.py
 python .workbuddy/skills/english-learn-books/scripts/build_books.py   # 五本全建
 ```
 
-三个脚本都在 `scripts/` 下：`build_books.py`（排版导出）、`check_books.py`（校验）、`rebuild_toc.py`（目录重建）。它们都用 `Path(__file__).resolve().parents[4]` 定位仓库根，**不依赖当前工作目录**，从任何路径调用都可以。解释器用 `C:\Users\gaoshiqiang\.workbuddy\binaries\python\envs\default\Scripts\python.exe`。动版式之前读 `references/typesetting.md`，里面有 GB/T 18358-2009 的依据、本项目相对国标的偏离点、字号体系、表格列宽三段式算法、目录页码回填为什么要两到三次渲染。
+五个脚本都在 `scripts/` 下：`booklib.py`（共享常量与工具：ROOT、五书清单、`slug()`、`header_period()`、中文数字）、`build_books.py`（排版导出）、`check_books.py`（结构校验）、`check_layout.py`（版式校验，只渲染 HTML 阶段、快）、`rebuild_toc.py`（目录重建）。四个可执行脚本都 `import booklib`，改 slug 规则或增删书目只改 booklib 一处。它们都用 `Path(__file__).resolve().parents[4]` 定位仓库根，**不依赖当前工作目录**，从任何路径调用都可以。解释器用 `C:\Users\gaoshiqiang\.workbuddy\binaries\python\envs\default\Scripts\python.exe`。动版式之前读 `references/typesetting.md`，里面有 GB/T 18358-2009 的依据、本项目相对国标的偏离点、字号体系、表格列宽三段式算法、重复组表均分规则、目录页码回填为什么要两到三次渲染。
+
+**改过 `set_column_widths()` / `_balance_columns()` 之后必须跑 `check_layout.py`**——它检查每条 colgroup 求和为 100%、重复组表（表头由短模式重复 k 次，如 `单词|音标|意思`×2、`现在|过去`×3）各组精确占 1/k。这两条不满足时结构校验查不出来，只有渲染成 PDF 肉眼看才看得见。
 
 构建后逐本验证：
 
@@ -122,6 +124,8 @@ print(d.page_count, len(d.get_toc()), lv, sum(len(p.get_links()) for p in d))
 - **小学阶段正文不得低于 10.5pt**。这是 GB/T 18358-2009 对义务教育小学阶段的最小用字规定，当前正文 10.5pt 正压在线上
 - **h3 与 `p.exercise` 同为 12pt，只靠颜色区分**（`#1a4f82` 蓝 vs `#c45c12` 橙）。书签采集依赖这个颜色差。改任一方而不改 `collect_headings()`，「习题」就会混进书签和目录页码表
 - **表题用全角空格**：`表 12-3　标题`。排版脚本与 `check_books.py` 都按它识别表题
+- **重复组表各组必须均分**：表头由一个短模式重复 k 次的表（如 `单词|音标|意思`×2、`现在|过去`×3、`单词|音标`×3），k 组各占 1/k 行宽，组内列宽按各自内容再分配。由 `set_column_widths()` 的 repeating-groups 分支实现，改列宽算法后用 `check_layout.py` 验证
+- **同模式表共享网格**：同一书内表头模式与列数相同的重复组表，合并全部行后统一算宽，保证同页相邻表（如学生本「头部」与「手脚」）列线上下对齐；新增此类表时列宽会随全池内容变化，属预期
 - **「习题」写成独立段落，不要写成 `### 习题`**，这样才会渲染成橙色段落而不是标题
 - **不执行 `git commit` / `git push`，也不要问**。改动留在工作区
 - **不要删 `.workbuddy/` 目录**，里面有项目记忆和本 skill

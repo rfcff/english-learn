@@ -1,12 +1,12 @@
 ---
 name: english-learn-books
-description: 维护本仓库的五本英语辅导手册（小学英语辅导手册、小学英语-KET-PET辅导手册、小学英语辅导手册-学生本、自然拼读、初中英语学习辅导手册）。当需要为这些手册增补或修正词汇/语法/考试内容，对照广州或广东小学初中英语教科书（教科版广州版、沪教牛津）与剑桥 KET(A2 Key)/PET(B1 Preliminary) 官方考纲查漏补缺，在主册与三本派生书之间同步内容，重排章节或部分，重建目录，或用 scripts/build_books.py 按 GB/T 18358-2009 教科书版式导出 PDF 时使用。触发词：查漏补缺、KET、PET、辅导手册、学生本、自然拼读、同步到、章节重排、目录、PDF 导出、版式、教科书规范。
+description: 维护本仓库的五本英语辅导手册（小学英语辅导手册、小学英语-KET-PET辅导手册、小学英语辅导手册-学生本、自然拼读、初中英语学习辅导手册）。当需要为这些手册增补或修正词汇/语法/考试内容，对照广州或广东小学初中英语教科书（教科版广州版、沪教牛津）与剑桥 KET(A2 Key)/PET(B1 Preliminary) 官方考纲查漏补缺，在主册与三本派生书之间同步内容，重排章节或部分，重建目录，或用本 skill 的 scripts/build_books.py 按 GB/T 18358-2009 教科书版式导出 PDF 时使用。触发词：查漏补缺、KET、PET、辅导手册、学生本、自然拼读、同步到、章节重排、目录、PDF 导出、版式、教科书规范。
 agent_created: true
 ---
 
 # 英语辅导手册维护
 
-仓库里五本 Markdown 手册由 `scripts/build_books.py` 排成 PDF。它们互相引用紧密，其中一本是其余几本的合集，所以一处改动通常牵动三处。本 skill 承载三样单看文件读不出来的东西：内容边界、四本书的章节映射、版式规则与踩坑。
+仓库里五本 Markdown 手册由本 skill 的 `scripts/build_books.py` 排成 PDF。它们互相引用紧密，其中一本是其余几本的合集，所以一处改动通常牵动三处。本 skill 承载三样单看文件读不出来的东西：内容边界、四本书的章节映射、版式规则与踩坑。
 
 ## 何时使用
 
@@ -88,17 +88,19 @@ python .workbuddy/skills/english-learn-books/scripts/rebuild_toc.py 自然拼读
 python .workbuddy/skills/english-learn-books/scripts/check_books.py
 ```
 
-有任何问题退出码为 1。检查项：章号/小节号/表号连续且前缀与章号一致、表格列数一致、表格前有空行、**标题不紧贴表格末行**（否则被 Markdown 当表格续行吞掉）、交叉引用（`12.3`、`表 12-3`、`第X章`、`第X部分`）全部可解析、目录锚点与真实标题 slug 对得上、标题层级不跳级、无残留占位符、无重复章题或表题、无空表，以及跨书的章节映射是否仍成立。每次内容或结构改动后、构建 PDF 前都要跑。
+有任何问题退出码为 1。检查项：章号/小节号/表号连续且前缀与章号一致、表格列数一致、表格前有空行、**标题不紧贴表格末行**（否则被 Markdown 当表格续行吞掉）、交叉引用（`12.3`、`表 12-3`、`第X章`、`第X部分`）全部可解析、**目录双向校验**（锚点与真实标题 slug 对得上，且 `rebuild_toc.py` 该收录的标题一个不漏、不该有的条目一个不留）、标题层级不跳级、无残留占位符、无重复章题或表题、无空表，以及跨书的章节映射是否仍成立。每次内容或结构改动后、构建 PDF 前都要跑。
+
+**改完章节标题或增删小节，必须先跑 `rebuild_toc.py` 再跑本校验**——漏跑会被反向校验抓出来（曾有一次小节标题批量改名后忘重建目录，18 条目录条目丢失，而 PDF 里书签正常、页面无报错，只有目录页少了一截）。
 
 两类**属正常的提示**（不是错误）：第 3 行的版本表本就是单行表；初中册每章都写 `### 习题` 是既定设计。
 
 ### 6. 构建 PDF
 
 ```bash
-python scripts/build_books.py                                    # 五本全建
+python .workbuddy/skills/english-learn-books/scripts/build_books.py   # 五本全建
 ```
 
-解释器用 `C:\Users\gaoshiqiang\.workbuddy\binaries\python\envs\default\Scripts\python.exe`。动版式之前读 `references/typesetting.md`，里面有 GB/T 18358-2009 的依据、本项目相对国标的偏离点、字号体系、表格列宽三段式算法、目录页码回填为什么要两到三次渲染。
+三个脚本都在 `scripts/` 下：`build_books.py`（排版导出）、`check_books.py`（校验）、`rebuild_toc.py`（目录重建）。它们都用 `Path(__file__).resolve().parents[4]` 定位仓库根，**不依赖当前工作目录**，从任何路径调用都可以。解释器用 `C:\Users\gaoshiqiang\.workbuddy\binaries\python\envs\default\Scripts\python.exe`。动版式之前读 `references/typesetting.md`，里面有 GB/T 18358-2009 的依据、本项目相对国标的偏离点、字号体系、表格列宽三段式算法、目录页码回填为什么要两到三次渲染。
 
 构建后逐本验证：
 
@@ -111,7 +113,7 @@ for t in d.get_toc():
 print(d.page_count, len(d.get_toc()), lv, sum(len(p.get_links()) for p in d))
 ```
 
-预期值（内容一改页数就会漂，看书签层级与链接数更有意义）：主册约 211 页 / 385 书签 / 355 链接；KET-PET 册约 180 / 339 / 337；学生本约 35 / 65 / 65；自然拼读约 21 / 36 / 35；初中册约 72 / 54 / 49。**书签只有两级、或内部链接为 0，说明标题采集坏了**——去 `typesetting.md` 看 h3 与「习题」同字号那条。
+预期值（内容一改页数就会漂，看书签层级与链接数更有意义）：主册约 209 页 / 385 书签 / 373 链接；KET-PET 册约 178 / 339 / 337；学生本约 35 / 65 / 65；自然拼读约 21 / 36 / 35；初中册约 72 / 54 / 49。**书签只有两级、或内部链接为 0，说明标题采集坏了**——去 `typesetting.md` 看 h3 与「习题」同字号那条。
 
 最后把改动过的那一页渲染成图片看一眼，确认表格列宽正常，再回报完成。
 

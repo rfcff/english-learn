@@ -248,6 +248,61 @@ def check_references(rep, lines, secs, tabs, heads):
     rep.note('交叉引用 %d 处问题' % len(bad))
 
 
+def toc_block(lines):
+    """Return (start, end) index of the `## 目录` block, or (None, None)."""
+    start = None
+    for i, l in enumerate(lines):
+        if l.strip() == '## 目录':
+            start = i
+            break
+    if start is None:
+        return None, None
+    for j in range(start + 1, len(lines)):
+        if (re.match(r'^# 第[一二三四五六七八九十]+部分 ', lines[j])
+                or re.match(r'^## 第[一二三四五六七八九十]+章 ', lines[j])
+                or re.match(r'^## (?!目录)[^#]', lines[j])):
+            return start, j
+    return start, len(lines)
+
+
+def expected_toc_anchors(lines):
+    """Mirror rebuild_toc.py: which headings *should* be listed.
+
+    Structured books collect 部分 / 第X章 / numbered `N.M` sections only —
+    bare `### 习题`, `### 附录一` and `## 引用文献` are out of scope, so the
+    check must not demand them. The student book collects every `##`/`###`.
+    """
+    structured = any(re.match(r'^## 第[一二三四五六七八九十]+章 ', l) for l in lines)
+    start, end = toc_block(lines)
+    out = []
+    for i, l in enumerate(lines):
+        # `end` indexes the first body heading, which is itself collectable,
+        # so only the strictly-interior TOC lines are skipped.
+        if start is not None and start < i < end:
+            continue
+        if structured:
+            m = re.match(r'^# (第[一二三四五六七八九十]+部分 .+)$', l)
+            if m:
+                out.append(m.group(1))
+                continue
+            m = re.match(r'^## (第[一二三四五六七八九十]+章 .+)$', l)
+            if m:
+                out.append(m.group(1))
+                continue
+            m = re.match(r'^### (\d+\.\d+ .+)$', l)
+            if m:
+                out.append(m.group(1))
+        else:
+            m = re.match(r'^## ([^#].+)$', l)
+            if m and m.group(1) != '目录':
+                out.append(m.group(1))
+                continue
+            m = re.match(r'^### (.+)$', l)
+            if m:
+                out.append(m.group(1))
+    return {slug(t): t for t in out}
+
+
 def check_toc(rep, lines, heads):
     links = []
     for i, l in enumerate(lines):
@@ -256,6 +311,25 @@ def check_toc(rep, lines, heads):
     bad = [(n, a) for n, a in links if a not in heads]
     for n, a in bad:
         rep.err('第%d行 目录链接 #%s 无对应标题' % (n, a))
+
+    # Reverse direction: every heading rebuild_toc.py would collect must
+    # already be listed. Only checking the forward direction lets a forgotten
+    # rebuild pass silently — 46.1–46.18 were renamed once and lost all 18
+    # TOC entries while every other check stayed green.
+    start, end = toc_block(lines)
+    if start is not None:
+        listed = set()
+        for i, l in enumerate(lines):
+            if start < i < end:
+                for m in re.finditer(r'\]\(#([^)]+)\)', l):
+                    listed.add(m.group(1))
+        expected = expected_toc_anchors(lines)
+        missing = [(a, t) for a, t in expected.items() if a not in listed]
+        for a, t in missing:
+            rep.err('标题「%s」未收录进目录（跑 rebuild_toc.py）' % t[:40])
+        stale = listed - set(expected)
+        for a in sorted(stale):
+            rep.err('目录条目 #%s 已无对应标题（跑 rebuild_toc.py）' % a)
     rep.note('目录链接 %d 个' % len(links))
 
 

@@ -13,7 +13,7 @@ sys.path.insert(0, "/tmp/pylibs")
 
 import markdown
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parents[4]  # <repo>/.workbuddy/skills/english-learn-books/scripts
 
 
 def find_chrome():

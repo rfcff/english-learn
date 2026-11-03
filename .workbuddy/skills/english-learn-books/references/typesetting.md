@@ -1,6 +1,6 @@
 # PDF 版式规范与 build_books.py 定制点
 
-排版全部由 `scripts/build_books.py` 完成：Markdown → HTML（`markdown` 库）→ 无头 Chrome 打印 PDF → PyMuPDF 回填目录页码并写书签。改版式就改这个脚本，不要手工调 PDF。
+排版全部由本 skill 的 `scripts/build_books.py` 完成：Markdown → HTML（`markdown` 库）→ 无头 Chrome 打印 PDF → PyMuPDF 回填目录页码并写书签。改版式就改这个脚本，不要手工调 PDF。
 
 ---
 
@@ -189,11 +189,10 @@ md → markdown.markdown(extensions=["tables", "sane_lists"])
 
 依赖：`markdown`、`PyMuPDF`（函数内延迟 `import fitz`）、系统 Chrome 或 Edge（`find_chrome()` L19–43 在 Windows 试 5 个候选路径）。**无 requirements.txt**，环境里已装好。Python 解释器用 `C:\Users\gaoshiqiang\.workbuddy\binaries\python\envs\default\Scripts\python.exe`。
 
-构建命令：
+构建命令（脚本用 `parents[4]` 定位仓库根，从任何工作目录调用都行）：
 
 ```bash
-cd D:/workspace/opensource/english-learn
-python scripts/build_books.py                       # 五本全部重建
+python .workbuddy/skills/english-learn-books/scripts/build_books.py   # 五本全部重建
 ```
 
 单本重建（改一本书时更快）：
@@ -201,10 +200,11 @@ python scripts/build_books.py                       # 五本全部重建
 ```python
 import importlib.util
 from pathlib import Path
-spec = importlib.util.spec_from_file_location('bb', 'scripts/build_books.py')
+spec = importlib.util.spec_from_file_location(
+    'bb', '.workbuddy/skills/english-learn-books/scripts/build_books.py')
 bb = importlib.util.module_from_spec(spec); spec.loader.exec_module(bb)
-bb.write_book(Path('小学英语辅导手册.md').resolve(), '小学英语辅导手册',
-              'full-book.html', Path('小学英语辅导手册.pdf').resolve())
+bb.write_book(bb.ROOT / '小学英语辅导手册.md', '小学英语辅导手册',
+              'full-book.html', bb.ROOT / '小学英语辅导手册.pdf')
 ```
 
 验证产物（页数、书签层级分布、内部链接数）：

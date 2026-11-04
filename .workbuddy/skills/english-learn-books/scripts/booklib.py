@@ -32,6 +32,8 @@ BOOKS = [
      'phonics-book.html', '自然拼读.pdf'),
     ('小学英语-KET-PET辅导手册.md', '小学英语 · KET · PET 辅导手册',
      'ket-pet-book.html', '小学英语-KET-PET辅导手册.pdf'),
+    ('药品生产质量管理规范(GMP)单词手册.md', '药品生产质量管理规范（GMP）单词手册',
+     'gmp-book.html', '药品生产质量管理规范(GMP)单词手册.pdf'),
 ]
 BOOK_NAMES = [b[0] for b in BOOKS]
 

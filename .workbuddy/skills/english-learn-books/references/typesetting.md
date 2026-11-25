@@ -85,7 +85,7 @@
 
 - `thead { display: table-header-group }` 表头跨页重复；`tr { break-inside: avoid }` 行不拆断。
 - `mark_wide_tables()`（L420–429）：首行 ≥6 列加 `class="wide"`，行高降 1.35、padding 减至 2.6pt 3.2pt。
-- `mark_vocab_tables()`（L432–449）：表头前四列恰为 `词条/音标/释义/说明` 时加 `class="vocab"`，首列 Arial 700、`#1a4f82`、nowrap。可与 wide 叠加。
+- `mark_vocab_tables()`：表头中任一列命中 `HW_HEADERS`（去空白后匹配）时加 `class="vocab"`，对应列的数据格加 `class="hw"`（Arial 700、`#1a4f82`）。集合含：`词条`/`单词`；义联想的 `词`/`反义`/`中心词`；第一部分的 `字母`/`元音`/`短音词`/`加e后`/`原词`/`加ing`；`搭配`；形联想的 `词对`/`基础词`/`加字母后`/`减一字母`。短词列再加 `nowrap`；`搭配` 允许折行。多组并列表每一组的词列都会着色。可与 wide 叠加。
 - `protect_cell_text()`（L452–465）：`★○◆●` 标记后用 NBSP 黏住词形；`/xxx/` 音标包 `span.ipa` 防拆行。
 - **表号 `表 N-M` 是 md 里手写的，脚本只识别不重编号**；图号则相反，由 `decorate()`（L479–497）按当前章号自动生成 `N-M` 前缀。
 

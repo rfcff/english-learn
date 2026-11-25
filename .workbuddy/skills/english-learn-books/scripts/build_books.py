@@ -365,10 +365,12 @@ th {
 }
 span.ipa { white-space: nowrap; font-family: "Times New Roman", "Songti SC", serif; color: #4e5964; }
 tbody tr:last-child td { border-bottom: none; }
-table.vocab td:first-child {
+table.vocab td.hw {
   font-family: Arial, "Helvetica Neue", "Hiragino Sans GB", "Songti SC", sans-serif;
   font-weight: 700;
   color: #1a4f82;
+}
+table.vocab td.hw.nowrap {
   white-space: nowrap;
 }
 table.wide { font-size: 10pt; line-height: 1.35; }
@@ -429,8 +431,64 @@ def mark_wide_tables(html):
     return re.sub(r"<table\b.*?</table>", repl, html, flags=re.S)
 
 
+# Headword-like columns styled like 表 9-1 (Arial 700 / #1a4f82).
+# Keys are whitespace-stripped so "加 e 后" and "加e后" match the same entry.
+HW_HEADERS = frozenset({
+    "词条", "单词",
+    # 义联想
+    "词", "反义", "中心词",
+    # 第一部分自然拼读
+    "字母", "元音", "短音词", "加e后", "原词", "加ing",
+    # KET 要会拼的词 / 介词搭配等
+    "搭配",
+    # 形联想
+    "词对", "基础词", "加字母后", "减一字母",
+})
+# Long phrase columns: keep blue bold, but allow wrap.
+HW_WRAP_HEADERS = frozenset({"搭配"})
+
+
+def _header_key(text):
+    return re.sub(r"\s+", "", text.strip())
+
+
+def _tag_hw_cells(row, word_idxs, nowrap_idxs):
+    """Add class=hw (and nowrap when appropriate) to headword cells."""
+
+    cells = list(re.finditer(r"<t([dh])(\s[^>]*)?>(.*?)</t\1>", row, re.S))
+    if not cells:
+        return row
+    parts = []
+    last = 0
+    for i, cell in enumerate(cells):
+        parts.append(row[last:cell.start()])
+        if i in word_idxs:
+            tag, attrs, inner = cell.group(1), cell.group(2) or "", cell.group(3)
+            klass = "hw nowrap" if i in nowrap_idxs else "hw"
+            if re.search(r'\bclass="', attrs):
+                attrs = re.sub(
+                    r'\bclass="([^"]*)"',
+                    lambda m: f'class="{m.group(1)} {klass}"',
+                    attrs,
+                    count=1,
+                )
+            else:
+                attrs = f'{attrs} class="{klass}"'
+            parts.append(f"<t{tag}{attrs}>{inner}</t{tag}>")
+        else:
+            parts.append(cell.group(0))
+        last = cell.end()
+    parts.append(row[last:])
+    return "".join(parts)
+
+
 def mark_vocab_tables(html):
-    """Mark word tables so headwords can keep textbook styling."""
+    """Mark word tables so headwords keep textbook blue styling.
+
+    Any table whose header has a column in HW_HEADERS is marked class=vocab.
+    Those columns get class=hw (Arial 700 / #1a4f82), matching 表 9-1.
+    Short headword columns also get nowrap; 搭配 may wrap.
+    """
 
     def repl(match):
         table = match.group(0)
@@ -441,10 +499,31 @@ def mark_vocab_tables(html):
             strip_tags(cell)
             for cell in re.findall(r"<t[dh][^>]*>(.*?)</t[dh]>", first.group(0), re.S)
         ]
-        if heads[:4] != ["词条", "音标", "释义", "说明"]:
+        keys = [_header_key(h) for h in heads]
+        word_idxs = {i for i, k in enumerate(keys) if k in HW_HEADERS}
+        if not word_idxs:
             return table
-        table = table.replace("<table>", '<table class="vocab">', 1)
-        return table.replace('<table class="wide">', '<table class="vocab wide">', 1)
+        nowrap_idxs = {i for i in word_idxs if keys[i] not in HW_WRAP_HEADERS}
+        if '<table class="wide">' in table:
+            table = table.replace('<table class="wide">', '<table class="vocab wide">', 1)
+        else:
+            table = table.replace("<table>", '<table class="vocab">', 1)
+
+        rows = list(re.finditer(r"<tr\b.*?</tr>", table, re.S))
+        if len(rows) <= 1:
+            return table
+        parts = []
+        last = 0
+        for ri, row_m in enumerate(rows):
+            parts.append(table[last:row_m.start()])
+            row = row_m.group(0)
+            # Header stays unstyled; body headword cells get .hw
+            parts.append(
+                row if ri == 0 else _tag_hw_cells(row, word_idxs, nowrap_idxs)
+            )
+            last = row_m.end()
+        parts.append(table[last:])
+        return "".join(parts)
 
     return re.sub(r"<table\b.*?</table>", repl, html, flags=re.S)
 
